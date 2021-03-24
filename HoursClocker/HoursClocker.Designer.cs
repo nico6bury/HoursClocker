@@ -30,9 +30,9 @@ namespace HoursClocker
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
             "Specify Date"}, -1, System.Drawing.Color.Empty, System.Drawing.Color.MintCream, null);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Specify Beginning and End");
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Specify Beginning and End");
             this.uxNewClockInGroup = new System.Windows.Forms.GroupBox();
             this.uxCurrentTimeTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -52,18 +52,18 @@ namespace HoursClocker
             this.uxStartDateTimeLbl = new System.Windows.Forms.Label();
             this.uxAddPrevTimeBtn = new System.Windows.Forms.Button();
             this.uxSavedHoursGroup = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.uxSavedHoursView = new System.Windows.Forms.ListView();
             this.uxInstanceHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.uxHoursHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.uxMinutesHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.uxDateHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.uxGroupsGroup = new System.Windows.Forms.GroupBox();
-            this.listView2 = new System.Windows.Forms.ListView();
+            this.uxGroupsView = new System.Windows.Forms.ListView();
             this.uxGroupNameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.uxCountHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.uxTotalTimeHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.uxGroupNameTextBox = new System.Windows.Forms.TextBox();
             this.uxFormMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstriptools = new System.Windows.Forms.ToolStripMenuItem();
@@ -148,6 +148,7 @@ namespace HoursClocker
             this.uxClockOutBtn.TabIndex = 11;
             this.uxClockOutBtn.Text = "Clock Out";
             this.uxClockOutBtn.UseVisualStyleBackColor = false;
+            this.uxClockOutBtn.Click += new System.EventHandler(this.uxClockOutBtn_Click);
             // 
             // uxClockInBtn
             // 
@@ -186,6 +187,7 @@ namespace HoursClocker
             this.uxCurrentTimeElapsedTextBox.TabIndex = 0;
             this.uxCurrentTimeElapsedTextBox.TabStop = false;
             this.uxCurrentTimeElapsedTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uxCurrentTimeElapsedTextBox.Click += new System.EventHandler(this.uxCurrentTimeElapsedTextBox_Click);
             // 
             // uxPrevHourGroup
             // 
@@ -321,7 +323,7 @@ namespace HoursClocker
             // uxSavedHoursGroup
             // 
             this.uxSavedHoursGroup.BackColor = System.Drawing.Color.MistyRose;
-            this.uxSavedHoursGroup.Controls.Add(this.listView1);
+            this.uxSavedHoursGroup.Controls.Add(this.uxSavedHoursView);
             this.uxSavedHoursGroup.ForeColor = System.Drawing.Color.Maroon;
             this.uxSavedHoursGroup.Location = new System.Drawing.Point(12, 387);
             this.uxSavedHoursGroup.Name = "uxSavedHoursGroup";
@@ -330,25 +332,25 @@ namespace HoursClocker
             this.uxSavedHoursGroup.TabStop = false;
             this.uxSavedHoursGroup.Text = "Saved Hours";
             // 
-            // listView1
+            // uxSavedHoursView
             // 
-            this.listView1.BackColor = System.Drawing.Color.SeaShell;
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.uxSavedHoursView.BackColor = System.Drawing.Color.SeaShell;
+            this.uxSavedHoursView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.uxInstanceHeader,
             this.uxHoursHeader,
             this.uxMinutesHeader,
             this.uxDateHeader});
-            this.listView1.ForeColor = System.Drawing.Color.Maroon;
-            this.listView1.FullRowSelect = true;
-            this.listView1.GridLines = true;
-            this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(6, 19);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(526, 143);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.uxSavedHoursView.ForeColor = System.Drawing.Color.Maroon;
+            this.uxSavedHoursView.FullRowSelect = true;
+            this.uxSavedHoursView.GridLines = true;
+            this.uxSavedHoursView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.uxSavedHoursView.HideSelection = false;
+            this.uxSavedHoursView.Location = new System.Drawing.Point(6, 19);
+            this.uxSavedHoursView.Name = "uxSavedHoursView";
+            this.uxSavedHoursView.Size = new System.Drawing.Size(526, 143);
+            this.uxSavedHoursView.TabIndex = 0;
+            this.uxSavedHoursView.UseCompatibleStateImageBehavior = false;
+            this.uxSavedHoursView.View = System.Windows.Forms.View.Details;
             // 
             // uxInstanceHeader
             // 
@@ -373,9 +375,9 @@ namespace HoursClocker
             // uxGroupsGroup
             // 
             this.uxGroupsGroup.BackColor = System.Drawing.Color.Lavender;
-            this.uxGroupsGroup.Controls.Add(this.listView2);
+            this.uxGroupsGroup.Controls.Add(this.uxGroupsView);
             this.uxGroupsGroup.Controls.Add(this.label7);
-            this.uxGroupsGroup.Controls.Add(this.textBox1);
+            this.uxGroupsGroup.Controls.Add(this.uxGroupNameTextBox);
             this.uxGroupsGroup.ForeColor = System.Drawing.Color.Indigo;
             this.uxGroupsGroup.Location = new System.Drawing.Point(12, 210);
             this.uxGroupsGroup.Name = "uxGroupsGroup";
@@ -384,24 +386,24 @@ namespace HoursClocker
             this.uxGroupsGroup.TabStop = false;
             this.uxGroupsGroup.Text = "Groups";
             // 
-            // listView2
+            // uxGroupsView
             // 
-            this.listView2.BackColor = System.Drawing.Color.LavenderBlush;
-            this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.uxGroupsView.BackColor = System.Drawing.Color.LavenderBlush;
+            this.uxGroupsView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.uxGroupNameHeader,
             this.uxCountHeader,
             this.uxTotalTimeHeader});
-            this.listView2.ForeColor = System.Drawing.Color.Indigo;
-            this.listView2.GridLines = true;
-            this.listView2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listView2.HideSelection = false;
-            this.listView2.LabelEdit = true;
-            this.listView2.Location = new System.Drawing.Point(6, 68);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(531, 97);
-            this.listView2.TabIndex = 2;
-            this.listView2.UseCompatibleStateImageBehavior = false;
-            this.listView2.View = System.Windows.Forms.View.Details;
+            this.uxGroupsView.ForeColor = System.Drawing.Color.Indigo;
+            this.uxGroupsView.GridLines = true;
+            this.uxGroupsView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.uxGroupsView.HideSelection = false;
+            this.uxGroupsView.LabelEdit = true;
+            this.uxGroupsView.Location = new System.Drawing.Point(6, 68);
+            this.uxGroupsView.Name = "uxGroupsView";
+            this.uxGroupsView.Size = new System.Drawing.Size(531, 97);
+            this.uxGroupsView.TabIndex = 2;
+            this.uxGroupsView.UseCompatibleStateImageBehavior = false;
+            this.uxGroupsView.View = System.Windows.Forms.View.Details;
             // 
             // uxGroupNameHeader
             // 
@@ -429,16 +431,16 @@ namespace HoursClocker
             this.label7.Text = "Current Group Name";
             this.label7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // textBox1
+            // uxGroupNameTextBox
             // 
-            this.textBox1.BackColor = System.Drawing.Color.GhostWhite;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.ForeColor = System.Drawing.Color.Indigo;
-            this.textBox1.Location = new System.Drawing.Point(6, 36);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(531, 26);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uxGroupNameTextBox.BackColor = System.Drawing.Color.GhostWhite;
+            this.uxGroupNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxGroupNameTextBox.ForeColor = System.Drawing.Color.Indigo;
+            this.uxGroupNameTextBox.Location = new System.Drawing.Point(6, 36);
+            this.uxGroupNameTextBox.Name = "uxGroupNameTextBox";
+            this.uxGroupNameTextBox.Size = new System.Drawing.Size(531, 26);
+            this.uxGroupNameTextBox.TabIndex = 0;
+            this.uxGroupNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // uxFormMenuStrip
             // 
@@ -489,13 +491,13 @@ namespace HoursClocker
             this.uxListViewOptions.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.uxListViewOptions.GridLines = true;
             this.uxListViewOptions.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem3.Checked = true;
-            listViewItem3.StateImageIndex = 1;
-            listViewItem4.Checked = true;
-            listViewItem4.StateImageIndex = 1;
+            listViewItem7.Checked = true;
+            listViewItem7.StateImageIndex = 1;
+            listViewItem8.Checked = true;
+            listViewItem8.StateImageIndex = 1;
             this.uxListViewOptions.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem7,
+            listViewItem8});
             this.uxListViewOptions.Location = new System.Drawing.Point(6, 19);
             this.uxListViewOptions.Name = "uxListViewOptions";
             this.uxListViewOptions.Scrollable = false;
@@ -512,12 +514,12 @@ namespace HoursClocker
             // 
             // SystemTimeTimer
             // 
-            this.SystemTimeTimer.Interval = 500;
+            this.SystemTimeTimer.Interval = 1000;
             this.SystemTimeTimer.Tick += new System.EventHandler(this.SystemTimeTimer_Tick);
             // 
             // uxElapsedTimeTimer
             // 
-            this.uxElapsedTimeTimer.Interval = 500;
+            this.uxElapsedTimeTimer.Interval = 250;
             this.uxElapsedTimeTimer.Tick += new System.EventHandler(this.uxElapsedTimeTimer_Tick);
             // 
             // HoursClocker
@@ -577,7 +579,7 @@ namespace HoursClocker
         private System.Windows.Forms.Label uxStartDateTimeLbl;
         private System.Windows.Forms.Button uxAddPrevTimeBtn;
         private System.Windows.Forms.GroupBox uxSavedHoursGroup;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView uxSavedHoursView;
         private System.Windows.Forms.ColumnHeader uxInstanceHeader;
         private System.Windows.Forms.ColumnHeader uxHoursHeader;
         private System.Windows.Forms.ColumnHeader uxMinutesHeader;
@@ -585,11 +587,11 @@ namespace HoursClocker
         private System.Windows.Forms.GroupBox uxGroupsGroup;
         private System.Windows.Forms.MenuStrip uxFormMenuStrip;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox uxGroupNameTextBox;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolstriptools;
         private System.Windows.Forms.ToolStripMenuItem uxToggleGroupsBtn;
-        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ListView uxGroupsView;
         private System.Windows.Forms.ColumnHeader uxGroupNameHeader;
         private System.Windows.Forms.ColumnHeader uxCountHeader;
         private System.Windows.Forms.ColumnHeader uxTotalTimeHeader;

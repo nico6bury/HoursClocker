@@ -54,6 +54,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimedInstance.cs" />
+    <Compile Include="TimeGrouping.cs" />
+    <Compile Include="TimeGroupManager.cs" />
     <EmbeddedResource Include="HoursClocker.resx">
       <DependentUpon>HoursClocker.cs</DependentUpon>
     </EmbeddedResource>
