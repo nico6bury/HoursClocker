@@ -72,7 +72,7 @@ namespace HoursClocker
         {
             Start = DateTime.Now;
             DateTime temp = Start.AddHours(hours);
-            temp = temp.AddMinutes(minutes);
+            End = temp.AddMinutes(minutes);
         }//end 2-arg non-specific constructor
 
         /// <summary>

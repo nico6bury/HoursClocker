@@ -30,13 +30,13 @@ namespace HoursClocker
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "Specify Date"}, -1, System.Drawing.Color.Empty, System.Drawing.Color.MintCream, null);
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("Specify Beginning and End");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Specify Beginning and End");
             this.uxNewClockInGroup = new System.Windows.Forms.GroupBox();
             this.uxCurrentTimeTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.uxSaveCurrentTimeBtn = new System.Windows.Forms.Button();
+            this.uxCancelTime = new System.Windows.Forms.Button();
             this.uxClockOutBtn = new System.Windows.Forms.Button();
             this.uxClockInBtn = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
@@ -46,8 +46,8 @@ namespace HoursClocker
             this.uxHoursLbl = new System.Windows.Forms.Label();
             this.uxPrevMinuteInputNUD = new System.Windows.Forms.NumericUpDown();
             this.uxPrevHourInputNUD = new System.Windows.Forms.NumericUpDown();
-            this.uxStartDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.uxEndDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.uxStartDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.uxEndDatePicker = new System.Windows.Forms.DateTimePicker();
             this.uxEndDateTimeLbl = new System.Windows.Forms.Label();
             this.uxStartDateTimeLbl = new System.Windows.Forms.Label();
             this.uxAddPrevTimeBtn = new System.Windows.Forms.Button();
@@ -72,6 +72,10 @@ namespace HoursClocker
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SystemTimeTimer = new System.Windows.Forms.Timer(this.components);
             this.uxElapsedTimeTimer = new System.Windows.Forms.Timer(this.components);
+            this.uxStartTimeLbl = new System.Windows.Forms.Label();
+            this.uxStartTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.uxEndTimeLbl = new System.Windows.Forms.Label();
+            this.uxEndTimePicker = new System.Windows.Forms.DateTimePicker();
             this.uxNewClockInGroup.SuspendLayout();
             this.uxPrevHourGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uxPrevMinuteInputNUD)).BeginInit();
@@ -86,7 +90,7 @@ namespace HoursClocker
             this.uxNewClockInGroup.BackColor = System.Drawing.Color.Honeydew;
             this.uxNewClockInGroup.Controls.Add(this.uxCurrentTimeTextBox);
             this.uxNewClockInGroup.Controls.Add(this.label6);
-            this.uxNewClockInGroup.Controls.Add(this.uxSaveCurrentTimeBtn);
+            this.uxNewClockInGroup.Controls.Add(this.uxCancelTime);
             this.uxNewClockInGroup.Controls.Add(this.uxClockOutBtn);
             this.uxNewClockInGroup.Controls.Add(this.uxClockInBtn);
             this.uxNewClockInGroup.Controls.Add(this.label5);
@@ -125,26 +129,27 @@ namespace HoursClocker
             this.label6.Text = "Current System Time";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uxSaveCurrentTimeBtn
+            // uxCancelTime
             // 
-            this.uxSaveCurrentTimeBtn.BackColor = System.Drawing.Color.Honeydew;
-            this.uxSaveCurrentTimeBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxSaveCurrentTimeBtn.ForeColor = System.Drawing.Color.SeaGreen;
-            this.uxSaveCurrentTimeBtn.Location = new System.Drawing.Point(89, 74);
-            this.uxSaveCurrentTimeBtn.Name = "uxSaveCurrentTimeBtn";
-            this.uxSaveCurrentTimeBtn.Size = new System.Drawing.Size(96, 34);
-            this.uxSaveCurrentTimeBtn.TabIndex = 12;
-            this.uxSaveCurrentTimeBtn.Text = "Save Current";
-            this.uxSaveCurrentTimeBtn.UseVisualStyleBackColor = false;
+            this.uxCancelTime.BackColor = System.Drawing.Color.Honeydew;
+            this.uxCancelTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCancelTime.ForeColor = System.Drawing.Color.SeaGreen;
+            this.uxCancelTime.Location = new System.Drawing.Point(98, 74);
+            this.uxCancelTime.Name = "uxCancelTime";
+            this.uxCancelTime.Size = new System.Drawing.Size(77, 34);
+            this.uxCancelTime.TabIndex = 12;
+            this.uxCancelTime.Text = "Cancel";
+            this.uxCancelTime.UseVisualStyleBackColor = false;
+            this.uxCancelTime.Click += new System.EventHandler(this.uxCancelTime_Click);
             // 
             // uxClockOutBtn
             // 
             this.uxClockOutBtn.BackColor = System.Drawing.Color.Honeydew;
             this.uxClockOutBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uxClockOutBtn.ForeColor = System.Drawing.Color.SeaGreen;
-            this.uxClockOutBtn.Location = new System.Drawing.Point(191, 74);
+            this.uxClockOutBtn.Location = new System.Drawing.Point(192, 74);
             this.uxClockOutBtn.Name = "uxClockOutBtn";
-            this.uxClockOutBtn.Size = new System.Drawing.Size(78, 34);
+            this.uxClockOutBtn.Size = new System.Drawing.Size(77, 34);
             this.uxClockOutBtn.TabIndex = 11;
             this.uxClockOutBtn.Text = "Clock Out";
             this.uxClockOutBtn.UseVisualStyleBackColor = false;
@@ -178,6 +183,7 @@ namespace HoursClocker
             // uxCurrentTimeElapsedTextBox
             // 
             this.uxCurrentTimeElapsedTextBox.BackColor = System.Drawing.Color.GhostWhite;
+            this.uxCurrentTimeElapsedTextBox.Enabled = false;
             this.uxCurrentTimeElapsedTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uxCurrentTimeElapsedTextBox.ForeColor = System.Drawing.Color.SeaGreen;
             this.uxCurrentTimeElapsedTextBox.Location = new System.Drawing.Point(6, 42);
@@ -192,20 +198,24 @@ namespace HoursClocker
             // uxPrevHourGroup
             // 
             this.uxPrevHourGroup.BackColor = System.Drawing.Color.MintCream;
+            this.uxPrevHourGroup.Controls.Add(this.uxEndTimePicker);
+            this.uxPrevHourGroup.Controls.Add(this.uxEndTimeLbl);
+            this.uxPrevHourGroup.Controls.Add(this.uxStartTimePicker);
+            this.uxPrevHourGroup.Controls.Add(this.uxStartTimeLbl);
             this.uxPrevHourGroup.Controls.Add(this.uxListViewOptions);
             this.uxPrevHourGroup.Controls.Add(this.uxMinutesLbl);
             this.uxPrevHourGroup.Controls.Add(this.uxHoursLbl);
             this.uxPrevHourGroup.Controls.Add(this.uxPrevMinuteInputNUD);
             this.uxPrevHourGroup.Controls.Add(this.uxPrevHourInputNUD);
-            this.uxPrevHourGroup.Controls.Add(this.uxStartDateTimePicker);
-            this.uxPrevHourGroup.Controls.Add(this.uxEndDateTimePicker);
+            this.uxPrevHourGroup.Controls.Add(this.uxStartDatePicker);
+            this.uxPrevHourGroup.Controls.Add(this.uxEndDatePicker);
             this.uxPrevHourGroup.Controls.Add(this.uxEndDateTimeLbl);
             this.uxPrevHourGroup.Controls.Add(this.uxStartDateTimeLbl);
             this.uxPrevHourGroup.Controls.Add(this.uxAddPrevTimeBtn);
             this.uxPrevHourGroup.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.uxPrevHourGroup.Location = new System.Drawing.Point(293, 27);
             this.uxPrevHourGroup.Name = "uxPrevHourGroup";
-            this.uxPrevHourGroup.Size = new System.Drawing.Size(262, 177);
+            this.uxPrevHourGroup.Size = new System.Drawing.Size(262, 254);
             this.uxPrevHourGroup.TabIndex = 1;
             this.uxPrevHourGroup.TabStop = false;
             this.uxPrevHourGroup.Text = "Add Previous Hours";
@@ -262,35 +272,35 @@ namespace HoursClocker
             this.uxPrevHourInputNUD.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.uxPrevHourInputNUD.ThousandsSeparator = true;
             // 
-            // uxStartDateTimePicker
+            // uxStartDatePicker
             // 
-            this.uxStartDateTimePicker.CalendarForeColor = System.Drawing.Color.DarkSlateGray;
-            this.uxStartDateTimePicker.CalendarMonthBackground = System.Drawing.Color.MintCream;
-            this.uxStartDateTimePicker.CalendarTitleBackColor = System.Drawing.Color.SteelBlue;
-            this.uxStartDateTimePicker.CalendarTitleForeColor = System.Drawing.Color.DarkSlateGray;
-            this.uxStartDateTimePicker.CalendarTrailingForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.uxStartDateTimePicker.Location = new System.Drawing.Point(6, 111);
-            this.uxStartDateTimePicker.Name = "uxStartDateTimePicker";
-            this.uxStartDateTimePicker.Size = new System.Drawing.Size(248, 20);
-            this.uxStartDateTimePicker.TabIndex = 5;
+            this.uxStartDatePicker.CalendarForeColor = System.Drawing.Color.DarkSlateGray;
+            this.uxStartDatePicker.CalendarMonthBackground = System.Drawing.Color.MintCream;
+            this.uxStartDatePicker.CalendarTitleBackColor = System.Drawing.Color.SteelBlue;
+            this.uxStartDatePicker.CalendarTitleForeColor = System.Drawing.Color.DarkSlateGray;
+            this.uxStartDatePicker.CalendarTrailingForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.uxStartDatePicker.Location = new System.Drawing.Point(6, 189);
+            this.uxStartDatePicker.Name = "uxStartDatePicker";
+            this.uxStartDatePicker.Size = new System.Drawing.Size(248, 20);
+            this.uxStartDatePicker.TabIndex = 5;
             // 
-            // uxEndDateTimePicker
+            // uxEndDatePicker
             // 
-            this.uxEndDateTimePicker.CalendarForeColor = System.Drawing.Color.DarkSlateGray;
-            this.uxEndDateTimePicker.CalendarMonthBackground = System.Drawing.Color.MintCream;
-            this.uxEndDateTimePicker.CalendarTitleBackColor = System.Drawing.Color.SteelBlue;
-            this.uxEndDateTimePicker.CalendarTitleForeColor = System.Drawing.Color.DarkSlateGray;
-            this.uxEndDateTimePicker.CalendarTrailingForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.uxEndDateTimePicker.Location = new System.Drawing.Point(6, 150);
-            this.uxEndDateTimePicker.Name = "uxEndDateTimePicker";
-            this.uxEndDateTimePicker.Size = new System.Drawing.Size(248, 20);
-            this.uxEndDateTimePicker.TabIndex = 4;
+            this.uxEndDatePicker.CalendarForeColor = System.Drawing.Color.DarkSlateGray;
+            this.uxEndDatePicker.CalendarMonthBackground = System.Drawing.Color.MintCream;
+            this.uxEndDatePicker.CalendarTitleBackColor = System.Drawing.Color.SteelBlue;
+            this.uxEndDatePicker.CalendarTitleForeColor = System.Drawing.Color.DarkSlateGray;
+            this.uxEndDatePicker.CalendarTrailingForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.uxEndDatePicker.Location = new System.Drawing.Point(6, 228);
+            this.uxEndDatePicker.Name = "uxEndDatePicker";
+            this.uxEndDatePicker.Size = new System.Drawing.Size(248, 20);
+            this.uxEndDatePicker.TabIndex = 4;
             // 
             // uxEndDateTimeLbl
             // 
             this.uxEndDateTimeLbl.BackColor = System.Drawing.Color.LightCyan;
             this.uxEndDateTimeLbl.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.uxEndDateTimeLbl.Location = new System.Drawing.Point(6, 134);
+            this.uxEndDateTimeLbl.Location = new System.Drawing.Point(6, 212);
             this.uxEndDateTimeLbl.Name = "uxEndDateTimeLbl";
             this.uxEndDateTimeLbl.Size = new System.Drawing.Size(248, 13);
             this.uxEndDateTimeLbl.TabIndex = 3;
@@ -301,7 +311,7 @@ namespace HoursClocker
             // 
             this.uxStartDateTimeLbl.BackColor = System.Drawing.Color.LightCyan;
             this.uxStartDateTimeLbl.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.uxStartDateTimeLbl.Location = new System.Drawing.Point(6, 95);
+            this.uxStartDateTimeLbl.Location = new System.Drawing.Point(6, 173);
             this.uxStartDateTimeLbl.Name = "uxStartDateTimeLbl";
             this.uxStartDateTimeLbl.Size = new System.Drawing.Size(248, 13);
             this.uxStartDateTimeLbl.TabIndex = 2;
@@ -319,13 +329,14 @@ namespace HoursClocker
             this.uxAddPrevTimeBtn.TabIndex = 1;
             this.uxAddPrevTimeBtn.Text = "Finalize";
             this.uxAddPrevTimeBtn.UseVisualStyleBackColor = false;
+            this.uxAddPrevTimeBtn.Click += new System.EventHandler(this.uxAddPrevTimeBtn_Click);
             // 
             // uxSavedHoursGroup
             // 
             this.uxSavedHoursGroup.BackColor = System.Drawing.Color.MistyRose;
             this.uxSavedHoursGroup.Controls.Add(this.uxSavedHoursView);
             this.uxSavedHoursGroup.ForeColor = System.Drawing.Color.Maroon;
-            this.uxSavedHoursGroup.Location = new System.Drawing.Point(12, 387);
+            this.uxSavedHoursGroup.Location = new System.Drawing.Point(12, 464);
             this.uxSavedHoursGroup.Name = "uxSavedHoursGroup";
             this.uxSavedHoursGroup.Size = new System.Drawing.Size(543, 168);
             this.uxSavedHoursGroup.TabIndex = 2;
@@ -379,7 +390,7 @@ namespace HoursClocker
             this.uxGroupsGroup.Controls.Add(this.label7);
             this.uxGroupsGroup.Controls.Add(this.uxGroupNameTextBox);
             this.uxGroupsGroup.ForeColor = System.Drawing.Color.Indigo;
-            this.uxGroupsGroup.Location = new System.Drawing.Point(12, 210);
+            this.uxGroupsGroup.Location = new System.Drawing.Point(12, 287);
             this.uxGroupsGroup.Name = "uxGroupsGroup";
             this.uxGroupsGroup.Size = new System.Drawing.Size(543, 171);
             this.uxGroupsGroup.TabIndex = 1;
@@ -491,13 +502,13 @@ namespace HoursClocker
             this.uxListViewOptions.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.uxListViewOptions.GridLines = true;
             this.uxListViewOptions.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem7.Checked = true;
-            listViewItem7.StateImageIndex = 1;
-            listViewItem8.Checked = true;
-            listViewItem8.StateImageIndex = 1;
+            listViewItem3.Checked = true;
+            listViewItem3.StateImageIndex = 1;
+            listViewItem4.Checked = true;
+            listViewItem4.StateImageIndex = 1;
             this.uxListViewOptions.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8});
+            listViewItem3,
+            listViewItem4});
             this.uxListViewOptions.Location = new System.Drawing.Point(6, 19);
             this.uxListViewOptions.Name = "uxListViewOptions";
             this.uxListViewOptions.Scrollable = false;
@@ -522,6 +533,56 @@ namespace HoursClocker
             this.uxElapsedTimeTimer.Interval = 250;
             this.uxElapsedTimeTimer.Tick += new System.EventHandler(this.uxElapsedTimeTimer_Tick);
             // 
+            // uxStartTimeLbl
+            // 
+            this.uxStartTimeLbl.BackColor = System.Drawing.Color.LightCyan;
+            this.uxStartTimeLbl.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.uxStartTimeLbl.Location = new System.Drawing.Point(6, 95);
+            this.uxStartTimeLbl.Name = "uxStartTimeLbl";
+            this.uxStartTimeLbl.Size = new System.Drawing.Size(248, 13);
+            this.uxStartTimeLbl.TabIndex = 10;
+            this.uxStartTimeLbl.Text = "Start Time";
+            this.uxStartTimeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uxStartTimePicker
+            // 
+            this.uxStartTimePicker.CalendarForeColor = System.Drawing.Color.DarkSlateGray;
+            this.uxStartTimePicker.CalendarMonthBackground = System.Drawing.Color.MintCream;
+            this.uxStartTimePicker.CalendarTitleBackColor = System.Drawing.Color.SteelBlue;
+            this.uxStartTimePicker.CalendarTitleForeColor = System.Drawing.Color.DarkSlateGray;
+            this.uxStartTimePicker.CalendarTrailingForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.uxStartTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.uxStartTimePicker.Location = new System.Drawing.Point(6, 111);
+            this.uxStartTimePicker.Name = "uxStartTimePicker";
+            this.uxStartTimePicker.ShowUpDown = true;
+            this.uxStartTimePicker.Size = new System.Drawing.Size(248, 20);
+            this.uxStartTimePicker.TabIndex = 11;
+            // 
+            // uxEndTimeLbl
+            // 
+            this.uxEndTimeLbl.BackColor = System.Drawing.Color.LightCyan;
+            this.uxEndTimeLbl.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.uxEndTimeLbl.Location = new System.Drawing.Point(6, 134);
+            this.uxEndTimeLbl.Name = "uxEndTimeLbl";
+            this.uxEndTimeLbl.Size = new System.Drawing.Size(248, 13);
+            this.uxEndTimeLbl.TabIndex = 12;
+            this.uxEndTimeLbl.Text = "End Time";
+            this.uxEndTimeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uxEndTimePicker
+            // 
+            this.uxEndTimePicker.CalendarForeColor = System.Drawing.Color.DarkSlateGray;
+            this.uxEndTimePicker.CalendarMonthBackground = System.Drawing.Color.MintCream;
+            this.uxEndTimePicker.CalendarTitleBackColor = System.Drawing.Color.SteelBlue;
+            this.uxEndTimePicker.CalendarTitleForeColor = System.Drawing.Color.DarkSlateGray;
+            this.uxEndTimePicker.CalendarTrailingForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.uxEndTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.uxEndTimePicker.Location = new System.Drawing.Point(6, 150);
+            this.uxEndTimePicker.Name = "uxEndTimePicker";
+            this.uxEndTimePicker.ShowUpDown = true;
+            this.uxEndTimePicker.Size = new System.Drawing.Size(248, 20);
+            this.uxEndTimePicker.TabIndex = 13;
+            // 
             // HoursClocker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -529,7 +590,7 @@ namespace HoursClocker
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Linen;
-            this.ClientSize = new System.Drawing.Size(567, 562);
+            this.ClientSize = new System.Drawing.Size(567, 648);
             this.Controls.Add(this.uxGroupsGroup);
             this.Controls.Add(this.uxSavedHoursGroup);
             this.Controls.Add(this.uxPrevHourGroup);
@@ -563,7 +624,7 @@ namespace HoursClocker
         private System.Windows.Forms.GroupBox uxNewClockInGroup;
         private System.Windows.Forms.TextBox uxCurrentTimeTextBox;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button uxSaveCurrentTimeBtn;
+        private System.Windows.Forms.Button uxCancelTime;
         private System.Windows.Forms.Button uxClockOutBtn;
         private System.Windows.Forms.Button uxClockInBtn;
         private System.Windows.Forms.Label label5;
@@ -573,8 +634,8 @@ namespace HoursClocker
         private System.Windows.Forms.Label uxHoursLbl;
         private System.Windows.Forms.NumericUpDown uxPrevMinuteInputNUD;
         private System.Windows.Forms.NumericUpDown uxPrevHourInputNUD;
-        private System.Windows.Forms.DateTimePicker uxStartDateTimePicker;
-        private System.Windows.Forms.DateTimePicker uxEndDateTimePicker;
+        private System.Windows.Forms.DateTimePicker uxStartDatePicker;
+        private System.Windows.Forms.DateTimePicker uxEndDatePicker;
         private System.Windows.Forms.Label uxEndDateTimeLbl;
         private System.Windows.Forms.Label uxStartDateTimeLbl;
         private System.Windows.Forms.Button uxAddPrevTimeBtn;
@@ -599,6 +660,10 @@ namespace HoursClocker
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Timer SystemTimeTimer;
         private System.Windows.Forms.Timer uxElapsedTimeTimer;
+        private System.Windows.Forms.DateTimePicker uxEndTimePicker;
+        private System.Windows.Forms.Label uxEndTimeLbl;
+        private System.Windows.Forms.DateTimePicker uxStartTimePicker;
+        private System.Windows.Forms.Label uxStartTimeLbl;
     }
 }
 

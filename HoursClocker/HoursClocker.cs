@@ -76,8 +76,109 @@ namespace HoursClocker
             SystemTimeTimer_Tick(null, null);
         }//end constructor
 
+        /// <summary>
+        /// handler for adding previous times from the stuff
+        /// </summary>
+        private void uxAddPrevTimeBtn_Click(object sender, EventArgs e)
+        {
+            DateTime start;
+            DateTime end;
+
+            DateTime startDate;
+            DateTime endDate;
+
+            TimeSpan startTime;
+            TimeSpan endTime;
+
+            TimedInstance timedInstance;
+
+            if (specifyDate)
+            {
+                //get our stuff from DateTimePickers
+                startDate = uxStartDatePicker.Value.Date;
+                endDate = uxEndDatePicker.Value.Date;
+                startTime = uxStartTimePicker.Value.TimeOfDay;
+                endTime = uxEndTimePicker.Value.TimeOfDay;
+                
+                //put that stuff into start and end DateTimes
+                start = startDate.Add(startTime);
+                end = endDate.Add(endTime).AddMinutes(1);
+
+                //make sure we don't have a negative
+                while (start.Ticks > end.Ticks)
+                    end = end.AddDays(1);
+
+                //create our timed instance
+                timedInstance = new TimedInstance(start, end);
+                timedInstance.printDate = true;
+            }//end if we're specifying the date
+            else
+            {
+                if (specifyBeginEnd)
+                {
+                    //get our stuff from DateTimePickers
+                    startDate = DateTime.Now;
+                    endDate = DateTime.Now;
+                    startTime = uxStartTimePicker.Value.TimeOfDay;
+                    endTime = uxEndTimePicker.Value.TimeOfDay;
+
+                    //put that stuff into start and end DateTimes
+                    start = startDate.Add(startTime);
+                    end = endDate.Add(endTime).AddMinutes(1);
+
+                    //make sure we don't have a negative
+                    while (start.Ticks > end.Ticks)
+                        end = end.AddDays(1);
+
+                    //create our timed instance
+                    timedInstance = new TimedInstance(start, end);
+                    timedInstance.printDate = false;
+                }//end if we care about the beginning and end
+                else
+                {
+                    //create our timed instance
+                    timedInstance = new TimedInstance((int)uxPrevHourInputNUD.Value, (int)uxPrevMinuteInputNUD.Value);
+                    timedInstance.printDate = false;
+                }//end else we don't care about beginning and end
+            }//end else we don't care about the date
+
+
+            if (uxGroupsGroup.Visible)
+            {
+                string groupText = uxGroupNameTextBox.Text;
+
+                //figure out if it's just white space
+                bool foundNonSpace = false;
+                foreach (char chr in groupText)
+                {
+                    if (!Char.IsWhiteSpace(chr))
+                    {
+                        foundNonSpace = true;
+                        break;
+                    }//end if this is not white space
+                }//end foreach
+
+                //make changes if it is just white space
+                if (!foundNonSpace) groupText = "Ungrouped";
+
+                groupManager.AddTime(timedInstance, groupText);
+
+                UpdateListViews(true);
+            }//end if we're doing groups right now
+            else
+            {
+                groupManager.AddTime(timedInstance, "Ungrouped");
+
+                UpdateListViews(false);
+            }//end else we aren't doing groups rn
+        }//end uxAddPrevTimeBtn Click event handler
+
         private void uxListViewOptions_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
+            /// <summary>
+            /// whether or not we needed to force an update of the one
+            /// of the checkboxes. This seems to always trigger on form opening
+            /// </summary>
             bool forcedUpdate = false;
 
             //update fields
@@ -106,10 +207,10 @@ namespace HoursClocker
             if(forcedUpdate == true)
             {
                 //update object format
-                uxStartDateTimePicker.Format = DateTimePickerFormat.Long;
-                uxStartDateTimePicker.ShowUpDown = false;
-                uxEndDateTimePicker.Format = DateTimePickerFormat.Long;
-                uxEndDateTimePicker.ShowUpDown = false;
+                uxStartDatePicker.Format = DateTimePickerFormat.Long;
+                uxStartDatePicker.ShowUpDown = false;
+                uxEndDatePicker.Format = DateTimePickerFormat.Long;
+                uxEndDatePicker.ShowUpDown = false;
 
                 //update labels
                 uxStartDateTimeLbl.Text = "Start Date";
@@ -122,36 +223,38 @@ namespace HoursClocker
                 uxPrevMinuteInputNUD.Enabled = false;
 
                 uxStartDateTimeLbl.Enabled = true;
+                uxStartTimeLbl.Enabled = true;
                 uxEndDateTimeLbl.Enabled = true;
-                uxStartDateTimePicker.Enabled = true;
-                uxEndDateTimePicker.Enabled = true;
+                uxEndDateTimeLbl.Enabled = true;
+                uxStartDatePicker.Enabled = true;
+                uxStartTimePicker.Enabled = true;
+                uxEndDatePicker.Enabled = true;
+                uxEndTimePicker.Enabled = true;
                 return;
             }//end if we're forcing an update
 
             //handle format changes
             if (specifyDate)
             {
-                //update object format
-                uxStartDateTimePicker.Format = DateTimePickerFormat.Long;
-                uxStartDateTimePicker.ShowUpDown = false;
-                uxEndDateTimePicker.Format = DateTimePickerFormat.Long;
-                uxEndDateTimePicker.ShowUpDown = false;
-
-                //update labels
-                uxStartDateTimeLbl.Text = "Start Date";
-                uxEndDateTimeLbl.Text = "End Date";
+                uxStartDateTimeLbl.Enabled = true;
+                uxEndDateTimeLbl.Enabled = true;
+                uxStartTimeLbl.Enabled = true;
+                uxEndTimeLbl.Enabled = true;
+                uxStartDatePicker.Enabled = true;
+                uxEndDatePicker.Enabled = true;
+                uxStartTimePicker.Enabled = true;
+                uxEndTimePicker.Enabled = true;
             }//end if we should specify the date
             else
             {
-                //update object format
-                uxStartDateTimePicker.Format = DateTimePickerFormat.Time;
-                uxStartDateTimePicker.ShowUpDown = true;
-                uxEndDateTimePicker.Format = DateTimePickerFormat.Time;
-                uxEndDateTimePicker.ShowUpDown = true;
-
-                //update labels
-                uxStartDateTimeLbl.Text = "Start Time";
-                uxEndDateTimeLbl.Text = "End Time";
+                uxStartDateTimeLbl.Enabled = false;
+                uxEndDateTimeLbl.Enabled = false;
+                uxStartTimeLbl.Enabled = false;
+                uxEndTimeLbl.Enabled = false;
+                uxStartDatePicker.Enabled = false;
+                uxEndDatePicker.Enabled = false;
+                uxStartTimePicker.Enabled = false;
+                uxEndTimePicker.Enabled = false;
             }//end else we just want times
             if (specifyBeginEnd)
             {
@@ -161,10 +264,8 @@ namespace HoursClocker
                 uxPrevHourInputNUD.Enabled = false;
                 uxPrevMinuteInputNUD.Enabled = false;
 
-                uxStartDateTimeLbl.Enabled = true;
-                uxEndDateTimeLbl.Enabled = true;
-                uxStartDateTimePicker.Enabled = true;
-                uxEndDateTimePicker.Enabled = true;
+                uxStartTimePicker.Enabled = true;
+                uxEndTimePicker.Enabled = true;
             }//end if we want beginning and ends
             else
             {
@@ -174,10 +275,8 @@ namespace HoursClocker
                 uxPrevHourInputNUD.Enabled = true;
                 uxPrevMinuteInputNUD.Enabled = true;
 
-                uxStartDateTimeLbl.Enabled = false;
-                uxEndDateTimeLbl.Enabled = false;
-                uxStartDateTimePicker.Enabled = false;
-                uxEndDateTimePicker.Enabled = false;
+                uxStartTimePicker.Enabled = false;
+                uxEndTimePicker.Enabled = false;
             }//end else we just want a span of time
         }//end uxListViewOptions ItemChecked event handler
 
@@ -261,8 +360,15 @@ namespace HoursClocker
         /// </summary>
         private void uxCurrentTimeElapsedTextBox_Click(object sender, EventArgs e)
         {
-            clockInTime = clockInTime.AddMinutes(-1);
+            //clockInTime = clockInTime.AddMinutes(-1);
         }//end uxCurrentTimeElapsedTextBox click event handler
+
+        private void uxCancelTime_Click(object sender, EventArgs e)
+        {
+            //update display
+            uxElapsedTimeTimer.Enabled = false;
+            uxCurrentTimeElapsedTextBox.ResetText();
+        }//end uxCancelTime click event handler
 
         /// <summary>
         /// updates the listviews to display entered hours.
