@@ -537,5 +537,33 @@ namespace HoursClocker
             //return our filename
             return configFilename;
         }//end SetUpDirectory
+
+        private void uxRemoveTime_Click(object sender, EventArgs e)
+        {
+            List<int> ints = new List<int>();
+            foreach (int index in uxSavedHoursView.SelectedIndices)
+            {
+                ints.Add(index);
+            }//end getting all the selected indices
+
+            List<TimedInstance> times = new List<TimedInstance>();
+            if (times == null) return;
+            foreach(int index in ints)
+            {
+                times.Add(groupManager[index]);
+            }//end looping over the indices
+
+            StringBuilder sb = new StringBuilder("\n");
+            foreach(TimedInstance time in times)
+            {
+                sb.AppendLine(time.ToString());
+            }//end adding all the times to a stringbuilder
+
+            if(DialogResult.Yes == MessageBox.Show($"Do you want to delete the following times?{sb}", "Delete Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            {
+                groupManager.RemoveTimes(ints);
+                UpdateListViews(true);
+            }//end if they want to delete the lines
+        }//end event handler for when the user wants to remove a time
     }//end class
 }//end namespace

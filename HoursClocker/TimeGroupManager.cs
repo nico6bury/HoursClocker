@@ -24,6 +24,31 @@ namespace HoursClocker
         public List<TimeGrouping> Groups { get; set; }
 
         /// <summary>
+        /// gets the TimedInstance sorta at the index
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        public TimedInstance this[int index]
+        {
+            get
+            {
+                int counter = 0;
+                foreach(TimeGrouping group in Groups)
+                {
+                    foreach(TimedInstance time in group.Times)
+                    {
+                        if (counter == index)
+                        {
+                            return time;
+                        }
+                        counter++;
+                    }
+                }
+                return null;
+            }//end get
+        }
+
+        /// <summary>
         /// Initializes list of groups
         /// </summary>
         public TimeGroupManager()
@@ -67,6 +92,37 @@ namespace HoursClocker
 
             return foundExistingGroup;
         }//end AddTime(time, groupName)
+
+        /// <summary>
+        /// indices must be in order
+        /// </summary>
+        /// <param name="indices">the indices in groupManager to remove</param>
+        public void RemoveTimes(List<int> indices)
+        {
+            if (indices == null || indices.Count <= 0) return;
+            int counter = 0;
+            int curIndexIndex = 0;
+
+            Dictionary<TimedInstance, TimeGrouping> groupTimePairs = new Dictionary<TimedInstance, TimeGrouping>();
+
+            foreach (TimeGrouping group in Groups)
+            {
+                foreach (TimedInstance time in group.Times)
+                {
+                    if(counter == indices[curIndexIndex])
+                    {
+                        groupTimePairs.Add(time, group);
+                        if (curIndexIndex < indices.Count - 1) curIndexIndex++;
+                    }
+                    counter++;
+                }
+            }
+
+            foreach(TimedInstance time in groupTimePairs.Keys)
+            {
+                groupTimePairs[time].Remove(time);
+            }
+        }//end RemoveTimes(indices)
 
         /// <summary>
         /// Generates a list of file data for this object

@@ -101,6 +101,11 @@ namespace HoursClocker
             return this.groupName.Equals(group.groupName);
         }//end Equals
 
+        public void Remove(TimedInstance time)
+        {
+            Times.Remove(time);
+        }//end Remove(time)
+
         /// <summary>
         /// returns a list of string lines formatted to be printed to a file.
         /// The string can be read back into a TimeGrouping via
