@@ -103,7 +103,7 @@ namespace HoursClocker
                 
                 //put that stuff into start and end DateTimes
                 start = startDate.Add(startTime);
-                end = endDate.Add(endTime).AddMinutes(1);
+                end = endDate.Add(endTime);
 
                 //make sure we don't have a negative
                 while (start.Ticks > end.Ticks)
