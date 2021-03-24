@@ -565,5 +565,23 @@ namespace HoursClocker
                 UpdateListViews(true);
             }//end if they want to delete the lines
         }//end event handler for when the user wants to remove a time
+
+        private void uxRemoveGroup_Click(object sender, EventArgs e)
+        {
+            List<int> ints = new List<int>();
+            foreach (int index in uxGroupsView.SelectedIndices)
+            {
+                ints.Add(index);
+            }//end getting all the selected indices
+
+            List<TimeGrouping> groups = new List<TimeGrouping>();
+            foreach(int index in ints)
+            {
+                groupManager.Groups[index].GroupName = "Ungrouped";
+            }//end getting the groups
+
+            groupManager.MergeEqualGroups();
+            UpdateListViews(true);
+        }//end event handler for when the user wants to remove a group
     }//end class
 }//end namespace
