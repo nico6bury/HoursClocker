@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -458,6 +459,83 @@ namespace HoursClocker
             return output;
         }//end FormatInstancesForSavedView(time)
 
-        
+        /// <summary>
+        /// occurs when the form loads up. loads information from a file
+        /// </summary>
+        private void HoursClocker_Load(object sender, EventArgs e)
+        {
+            //set up our directory and get the filename
+            string configFilename = SetUpDirectory("HourClockerDataFiles", "Hour Clocker Data");
+
+            //initialize list of lines
+            List<string> linesFromFile = new List<string>();
+
+            //read lines with a stream reader
+            using(StreamReader reader = new StreamReader(configFilename))
+            {
+                while (!reader.EndOfStream)
+                {
+                    linesFromFile.Add(reader.ReadLine());
+                }//end looping while there are still more lines
+            }//end use of reader
+
+            //now we need to process them
+            if (groupManager.ReadFileData(linesFromFile))
+            {
+                UpdateListViews(true);
+            }//end we must have read everything successfully
+            else
+            {
+                MessageBox.Show("File Parse Error", "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }//end else there must have been a problem
+        }//end Form Loading event handler
+
+        /// <summary>
+        /// occurs when the form is about to close. saves information to a file
+        /// </summary>
+        private void HoursClocker_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //get the lines we need to write from the manager
+            List<string> lines = groupManager.GenerateFileData();
+
+            //set up directory and get our filename
+            string configFilename = SetUpDirectory("HourClockerDataFiles", "Hour Clocker Data");
+
+            //write all our junk to the file
+            using (StreamWriter scribe = new StreamWriter(configFilename))
+            {
+                foreach(string line in lines)
+                {
+                    scribe.WriteLine(line);
+                }//end looping over each line
+            }//end use of scribe
+        }//end Form Closing event handler
+
+        /// <summary>
+        /// sets stuff up to put a filename in a new folder
+        /// </summary>
+        /// <param name="filename">the name of the file</param>
+        /// <param name="foldername">the name of the folder</param>
+        /// <returns>returns the path of the file which now exists</returns>
+        private string SetUpDirectory(string filename, string foldername)
+        {
+            //gets the directory we're currently in
+            string currentDirectory = Directory.GetCurrentDirectory();
+
+            //make our new directory
+            string dataDirectory = $"{currentDirectory}{Path.DirectorySeparatorChar}{foldername}";
+
+            //make the directory exist
+            Directory.CreateDirectory(dataDirectory);
+
+            //make file name
+            string configFilename = $"{dataDirectory}{Path.DirectorySeparatorChar}{filename}.txt";
+
+            //make sure the file exists
+            if (!File.Exists(configFilename)) File.Create(configFilename).Close();
+
+            //return our filename
+            return configFilename;
+        }//end SetUpDirectory
     }//end class
 }//end namespace

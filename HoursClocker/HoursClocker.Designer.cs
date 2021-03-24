@@ -42,6 +42,12 @@ namespace HoursClocker
             this.label5 = new System.Windows.Forms.Label();
             this.uxCurrentTimeElapsedTextBox = new System.Windows.Forms.TextBox();
             this.uxPrevHourGroup = new System.Windows.Forms.GroupBox();
+            this.uxEndTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.uxEndTimeLbl = new System.Windows.Forms.Label();
+            this.uxStartTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.uxStartTimeLbl = new System.Windows.Forms.Label();
+            this.uxListViewOptions = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.uxMinutesLbl = new System.Windows.Forms.Label();
             this.uxHoursLbl = new System.Windows.Forms.Label();
             this.uxPrevMinuteInputNUD = new System.Windows.Forms.NumericUpDown();
@@ -68,14 +74,8 @@ namespace HoursClocker
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolstriptools = new System.Windows.Forms.ToolStripMenuItem();
             this.uxToggleGroupsBtn = new System.Windows.Forms.ToolStripMenuItem();
-            this.uxListViewOptions = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SystemTimeTimer = new System.Windows.Forms.Timer(this.components);
             this.uxElapsedTimeTimer = new System.Windows.Forms.Timer(this.components);
-            this.uxStartTimeLbl = new System.Windows.Forms.Label();
-            this.uxStartTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.uxEndTimeLbl = new System.Windows.Forms.Label();
-            this.uxEndTimePicker = new System.Windows.Forms.DateTimePicker();
             this.uxNewClockInGroup.SuspendLayout();
             this.uxPrevHourGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uxPrevMinuteInputNUD)).BeginInit();
@@ -219,6 +219,90 @@ namespace HoursClocker
             this.uxPrevHourGroup.TabIndex = 1;
             this.uxPrevHourGroup.TabStop = false;
             this.uxPrevHourGroup.Text = "Add Previous Hours";
+            // 
+            // uxEndTimePicker
+            // 
+            this.uxEndTimePicker.CalendarForeColor = System.Drawing.Color.DarkSlateGray;
+            this.uxEndTimePicker.CalendarMonthBackground = System.Drawing.Color.MintCream;
+            this.uxEndTimePicker.CalendarTitleBackColor = System.Drawing.Color.SteelBlue;
+            this.uxEndTimePicker.CalendarTitleForeColor = System.Drawing.Color.DarkSlateGray;
+            this.uxEndTimePicker.CalendarTrailingForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.uxEndTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.uxEndTimePicker.Location = new System.Drawing.Point(6, 150);
+            this.uxEndTimePicker.Name = "uxEndTimePicker";
+            this.uxEndTimePicker.ShowUpDown = true;
+            this.uxEndTimePicker.Size = new System.Drawing.Size(248, 20);
+            this.uxEndTimePicker.TabIndex = 13;
+            // 
+            // uxEndTimeLbl
+            // 
+            this.uxEndTimeLbl.BackColor = System.Drawing.Color.LightCyan;
+            this.uxEndTimeLbl.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.uxEndTimeLbl.Location = new System.Drawing.Point(6, 134);
+            this.uxEndTimeLbl.Name = "uxEndTimeLbl";
+            this.uxEndTimeLbl.Size = new System.Drawing.Size(248, 13);
+            this.uxEndTimeLbl.TabIndex = 12;
+            this.uxEndTimeLbl.Text = "End Time";
+            this.uxEndTimeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uxStartTimePicker
+            // 
+            this.uxStartTimePicker.CalendarForeColor = System.Drawing.Color.DarkSlateGray;
+            this.uxStartTimePicker.CalendarMonthBackground = System.Drawing.Color.MintCream;
+            this.uxStartTimePicker.CalendarTitleBackColor = System.Drawing.Color.SteelBlue;
+            this.uxStartTimePicker.CalendarTitleForeColor = System.Drawing.Color.DarkSlateGray;
+            this.uxStartTimePicker.CalendarTrailingForeColor = System.Drawing.Color.DarkSlateBlue;
+            this.uxStartTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.uxStartTimePicker.Location = new System.Drawing.Point(6, 111);
+            this.uxStartTimePicker.Name = "uxStartTimePicker";
+            this.uxStartTimePicker.ShowUpDown = true;
+            this.uxStartTimePicker.Size = new System.Drawing.Size(248, 20);
+            this.uxStartTimePicker.TabIndex = 11;
+            // 
+            // uxStartTimeLbl
+            // 
+            this.uxStartTimeLbl.BackColor = System.Drawing.Color.LightCyan;
+            this.uxStartTimeLbl.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.uxStartTimeLbl.Location = new System.Drawing.Point(6, 95);
+            this.uxStartTimeLbl.Name = "uxStartTimeLbl";
+            this.uxStartTimeLbl.Size = new System.Drawing.Size(248, 13);
+            this.uxStartTimeLbl.TabIndex = 10;
+            this.uxStartTimeLbl.Text = "Start Time";
+            this.uxStartTimeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uxListViewOptions
+            // 
+            this.uxListViewOptions.Alignment = System.Windows.Forms.ListViewAlignment.Left;
+            this.uxListViewOptions.AutoArrange = false;
+            this.uxListViewOptions.BackColor = System.Drawing.Color.MintCream;
+            this.uxListViewOptions.CheckBoxes = true;
+            this.uxListViewOptions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.uxListViewOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxListViewOptions.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.uxListViewOptions.GridLines = true;
+            this.uxListViewOptions.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.uxListViewOptions.HideSelection = false;
+            listViewItem3.Checked = true;
+            listViewItem3.StateImageIndex = 1;
+            listViewItem4.Checked = true;
+            listViewItem4.StateImageIndex = 1;
+            this.uxListViewOptions.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem3,
+            listViewItem4});
+            this.uxListViewOptions.Location = new System.Drawing.Point(6, 19);
+            this.uxListViewOptions.Name = "uxListViewOptions";
+            this.uxListViewOptions.Scrollable = false;
+            this.uxListViewOptions.ShowGroups = false;
+            this.uxListViewOptions.Size = new System.Drawing.Size(155, 34);
+            this.uxListViewOptions.TabIndex = 4;
+            this.uxListViewOptions.UseCompatibleStateImageBehavior = false;
+            this.uxListViewOptions.View = System.Windows.Forms.View.Details;
+            this.uxListViewOptions.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.uxListViewOptions_ItemChecked);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 300;
             // 
             // uxMinutesLbl
             // 
@@ -486,42 +570,9 @@ namespace HoursClocker
             this.uxToggleGroupsBtn.BackColor = System.Drawing.Color.Transparent;
             this.uxToggleGroupsBtn.ForeColor = System.Drawing.Color.Black;
             this.uxToggleGroupsBtn.Name = "uxToggleGroupsBtn";
-            this.uxToggleGroupsBtn.Size = new System.Drawing.Size(180, 22);
+            this.uxToggleGroupsBtn.Size = new System.Drawing.Size(150, 22);
             this.uxToggleGroupsBtn.Text = "Toggle Groups";
             this.uxToggleGroupsBtn.Click += new System.EventHandler(this.uxToggleGroupsBtn_Click);
-            // 
-            // uxListViewOptions
-            // 
-            this.uxListViewOptions.Alignment = System.Windows.Forms.ListViewAlignment.Left;
-            this.uxListViewOptions.AutoArrange = false;
-            this.uxListViewOptions.BackColor = System.Drawing.Color.MintCream;
-            this.uxListViewOptions.CheckBoxes = true;
-            this.uxListViewOptions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
-            this.uxListViewOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxListViewOptions.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.uxListViewOptions.GridLines = true;
-            this.uxListViewOptions.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem3.Checked = true;
-            listViewItem3.StateImageIndex = 1;
-            listViewItem4.Checked = true;
-            listViewItem4.StateImageIndex = 1;
-            this.uxListViewOptions.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
-            this.uxListViewOptions.Location = new System.Drawing.Point(6, 19);
-            this.uxListViewOptions.Name = "uxListViewOptions";
-            this.uxListViewOptions.Scrollable = false;
-            this.uxListViewOptions.ShowGroups = false;
-            this.uxListViewOptions.Size = new System.Drawing.Size(155, 34);
-            this.uxListViewOptions.TabIndex = 4;
-            this.uxListViewOptions.UseCompatibleStateImageBehavior = false;
-            this.uxListViewOptions.View = System.Windows.Forms.View.Details;
-            this.uxListViewOptions.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.uxListViewOptions_ItemChecked);
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Width = 300;
             // 
             // SystemTimeTimer
             // 
@@ -532,56 +583,6 @@ namespace HoursClocker
             // 
             this.uxElapsedTimeTimer.Interval = 250;
             this.uxElapsedTimeTimer.Tick += new System.EventHandler(this.uxElapsedTimeTimer_Tick);
-            // 
-            // uxStartTimeLbl
-            // 
-            this.uxStartTimeLbl.BackColor = System.Drawing.Color.LightCyan;
-            this.uxStartTimeLbl.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.uxStartTimeLbl.Location = new System.Drawing.Point(6, 95);
-            this.uxStartTimeLbl.Name = "uxStartTimeLbl";
-            this.uxStartTimeLbl.Size = new System.Drawing.Size(248, 13);
-            this.uxStartTimeLbl.TabIndex = 10;
-            this.uxStartTimeLbl.Text = "Start Time";
-            this.uxStartTimeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uxStartTimePicker
-            // 
-            this.uxStartTimePicker.CalendarForeColor = System.Drawing.Color.DarkSlateGray;
-            this.uxStartTimePicker.CalendarMonthBackground = System.Drawing.Color.MintCream;
-            this.uxStartTimePicker.CalendarTitleBackColor = System.Drawing.Color.SteelBlue;
-            this.uxStartTimePicker.CalendarTitleForeColor = System.Drawing.Color.DarkSlateGray;
-            this.uxStartTimePicker.CalendarTrailingForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.uxStartTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.uxStartTimePicker.Location = new System.Drawing.Point(6, 111);
-            this.uxStartTimePicker.Name = "uxStartTimePicker";
-            this.uxStartTimePicker.ShowUpDown = true;
-            this.uxStartTimePicker.Size = new System.Drawing.Size(248, 20);
-            this.uxStartTimePicker.TabIndex = 11;
-            // 
-            // uxEndTimeLbl
-            // 
-            this.uxEndTimeLbl.BackColor = System.Drawing.Color.LightCyan;
-            this.uxEndTimeLbl.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.uxEndTimeLbl.Location = new System.Drawing.Point(6, 134);
-            this.uxEndTimeLbl.Name = "uxEndTimeLbl";
-            this.uxEndTimeLbl.Size = new System.Drawing.Size(248, 13);
-            this.uxEndTimeLbl.TabIndex = 12;
-            this.uxEndTimeLbl.Text = "End Time";
-            this.uxEndTimeLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uxEndTimePicker
-            // 
-            this.uxEndTimePicker.CalendarForeColor = System.Drawing.Color.DarkSlateGray;
-            this.uxEndTimePicker.CalendarMonthBackground = System.Drawing.Color.MintCream;
-            this.uxEndTimePicker.CalendarTitleBackColor = System.Drawing.Color.SteelBlue;
-            this.uxEndTimePicker.CalendarTitleForeColor = System.Drawing.Color.DarkSlateGray;
-            this.uxEndTimePicker.CalendarTrailingForeColor = System.Drawing.Color.DarkSlateBlue;
-            this.uxEndTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.uxEndTimePicker.Location = new System.Drawing.Point(6, 150);
-            this.uxEndTimePicker.Name = "uxEndTimePicker";
-            this.uxEndTimePicker.ShowUpDown = true;
-            this.uxEndTimePicker.Size = new System.Drawing.Size(248, 20);
-            this.uxEndTimePicker.TabIndex = 13;
             // 
             // HoursClocker
             // 
@@ -604,6 +605,8 @@ namespace HoursClocker
             this.ShowIcon = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Hour Clocker";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HoursClocker_FormClosing);
+            this.Load += new System.EventHandler(this.HoursClocker_Load);
             this.uxNewClockInGroup.ResumeLayout(false);
             this.uxNewClockInGroup.PerformLayout();
             this.uxPrevHourGroup.ResumeLayout(false);

@@ -107,6 +107,21 @@ namespace HoursClocker
             value = value.Substring(value.IndexOf(',') + 1);
             handleSpecificBeginEnd = Convert.ToBoolean(value);
 
+            //get printDate
+            value = fileComponents[1];
+            value = value.Substring(value.IndexOf(',') + 1);
+            printDate = Convert.ToBoolean(value);
+
+            //get start
+            value = fileComponents[2];
+            value = value.Substring(value.IndexOf(',') + 1);
+            Start = DateTime.Parse(value);
+
+            //get end
+            value = fileComponents[3];
+            value = value.Substring(value.IndexOf(',') + 1);
+            End = DateTime.Parse(value);
+
         }//end 1-arg constructor for reading data from a file line
 
         public override string ToString()
