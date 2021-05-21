@@ -29,9 +29,30 @@ namespace HoursClocker
         public DateTime End;
 
         public string DateSpan { get { return $"{Start:g} => {End:g}"; } }
-        public string StartDateShort { get { return $"{Start:d}"; } }
-        public int Hours { get { return TimeSpan.Hours; } }
-        public int Minutes { get { return TimeSpan.Minutes; } }
+        public string StartDateShort { get { return $"{Start:d}"; }
+            set
+            {
+
+            }//end setter
+        }//end StartDateShort
+        public int Hours { get { return TimeSpan.Hours; }
+            set
+            {
+                //figure out the difference between what we have and what we want
+                int hoursDifference = value - TimeSpan.Hours;
+                //add those hours to the DateTime End thing
+                End.AddHours(hoursDifference);
+            }//end setter
+        }//end Hours
+        public int Minutes { get { return TimeSpan.Minutes; }
+            set
+            {
+                //figure out the difference between what we have and what we want
+                int minutesDifference = value - TimeSpan.Minutes;
+                //add those hours to the DateTime End thing
+                End.AddMinutes(minutesDifference);
+            }//end setter
+        }//end Minutes
 
         /// <summary>
         /// The name of this timed instance, likely as set arbitrarily by the user

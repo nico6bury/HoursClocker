@@ -140,6 +140,8 @@ namespace HoursClocker
 
             TimedInstance timedInstance;
 
+            
+
             if (specifyDate)
             {
                 //get our stuff from DateTimePickers
@@ -157,8 +159,10 @@ namespace HoursClocker
                     end = end.AddDays(1);
 
                 //create our timed instance
-                timedInstance = new TimedInstance(start, end);
-                timedInstance.printDate = true;
+                timedInstance = new TimedInstance(start, end)
+                {
+                    printDate = true
+                };
             }//end if we're specifying the date
             else
             {
@@ -179,17 +183,25 @@ namespace HoursClocker
                         end = end.AddDays(1);
 
                     //create our timed instance
-                    timedInstance = new TimedInstance(start, end);
-                    timedInstance.printDate = false;
+                    timedInstance = new TimedInstance(start, end)
+                    {
+                        printDate = false
+                    };
                 }//end if we care about the beginning and end
                 else
                 {
                     //create our timed instance
-                    timedInstance = new TimedInstance((int)uxPrevHourInputNUD.Value, (int)uxPrevMinuteInputNUD.Value);
-                    timedInstance.printDate = false;
+                    timedInstance = new TimedInstance((int)uxPrevHourInputNUD.Value, (int)uxPrevMinuteInputNUD.Value)
+                    {
+                        printDate = false
+                    };
                 }//end else we don't care about beginning and end
             }//end else we don't care about the date
 
+            //get the name of the instance
+            timedInstance.InstanceName = uxTimeNameTextBox.Text == "" ? "Unnamed Instance" : uxTimeNameTextBox.Text;
+            //reset text in the textbox
+            uxTimeNameTextBox.ResetText();
 
             if (uxGroupsGroup.Visible)
             {
@@ -221,6 +233,11 @@ namespace HoursClocker
             }//end else we aren't doing groups rn
         }//end uxAddPrevTimeBtn Click event handler
 
+        /// <summary>
+        /// handles enabledness of things when the options checked list is changed by the user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxListViewOptions_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             /// <summary>
@@ -328,6 +345,11 @@ namespace HoursClocker
             }//end else we just want a span of time
         }//end uxListViewOptions ItemChecked event handler
 
+        /// <summary>
+        /// happens the users wants to toggle groups on or off
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void uxToggleGroupsBtn_Click(object sender, EventArgs e)
         {
             //update a bunch of random variables
@@ -368,6 +390,12 @@ namespace HoursClocker
             //save the new time
             clockOutTime = DateTime.Now;
             TimedInstance time = new TimedInstance(clockInTime, clockOutTime);
+
+            //get the name for that time
+            time.InstanceName = uxTimeNameTextBox.Text == "" ? "Unnamed Instance" : uxTimeNameTextBox.Text;
+            //reset text in the textbox
+            uxTimeNameTextBox.ResetText();
+
             if (uxGroupsGroup.Visible)
             {
                 string groupText = uxGroupNameTextBox.Text;
@@ -425,87 +453,17 @@ namespace HoursClocker
         private void UpdateListViews(bool updateGroupDisplay)
         {
             //reset uxSavedHoursView
-            uxSavedHoursView.Items.Clear();
-            //uxSavedHoursView.Groups.Clear();
+            uxSavedHoursView.ClearObjects();
 
-            //start updating uxSavedHoursView
-            //foreach(TimeGrouping group in groupManager.Groups)
-            //{
-            //    //initialize our group
-            //    OLVGroup olvGroup = new OLVGroup(group.GroupName);
-            //    //foreach(TimedInstance time in group.Times)
-            //    //{
-            //    //    //add new item with proper text and group
-            //    //    ListViewItem item = new ListViewItem(FormatInstancesForSavedView(time), viewGroup);
-            //    //    uxSavedHoursView.Items.Add(item);
-            //    //}//end looping over all the times in group
-            //}//end looping over each group in the manager
-            uxSavedHoursView.SetObjects(groupManager.Times);
+            //update uxSavedHoursView
+            foreach(TimeGrouping group in groupManager.Groups)
+            {
+                uxSavedHoursView.AddObjects(group.Times);
+            }//end getting the groups
 
             ////maybe we'll update the groupDisplay too
-            //if (updateGroupDisplay)
-            //{
-            //    uxGroupsView.Items.Clear();
-            //    foreach(TimeGrouping group in groupManager.Groups)
-            //    {
-            //        ListViewItem item = new ListViewItem(FormatInstancesForGroupView(group.Times, group.GroupName));
-            //        uxGroupsView.Items.Add(item);
-            //    }//end adding each group to the listview
-            //}//end if we're actually going to update the Group Display
             uxGroupsView.SetObjects(groupManager.Groups);
         }//end UpdateListViews(updateGroupDisplay
-
-        /// <summary>
-        /// makes a string array for displaying one group of TimedInstances
-        /// </summary>
-        private string[] FormatInstancesForGroupView(List<TimedInstance> times, string groupName)
-        {
-            string[] output = new string[3];
-
-            output[0] = groupName;
-
-            output[1] = times.Count.ToString();
-
-            double hours = 0;
-            
-            foreach(TimedInstance time in times)
-            {
-                hours += time.TimeSpan.TotalHours;
-            }//end adding up all the hours
-
-            output[2] = hours.ToString("N2");
-
-            return output;
-        }//end FormatInstancesForGroupView(times)
-
-        /// <summary>
-        /// makes string array for displaying one TimedInstance across a row in a ListView
-        /// </summary>
-        private string[] FormatInstancesForSavedView(TimedInstance time)
-        {
-            string[] output = new string[4];
-
-            //name of instance?
-            output[0] = time.Start.ToString("t");
-
-            //number of whole hours
-            output[1] = time.TimeSpan.Hours.ToString();
-
-            //number of minutes in addition to hours
-            output[2] = time.TimeSpan.Minutes.ToString();
-
-            //date for this instance
-            if(time.printDate || time.handleSpecificBeginEnd)
-            {
-                output[3] = time.Start.ToString("d");
-            }//end if we should print the date
-            else
-            {
-                output[3] = "NA";
-            }//end else we aren't printing the data
-
-            return output;
-        }//end FormatInstancesForSavedView(time)
 
         /// <summary>
         /// occurs when the form loads up. loads information from a file
@@ -631,5 +589,21 @@ namespace HoursClocker
             groupManager.MergeEqualGroups();
             UpdateListViews(true);
         }//end event handler for when the user wants to remove a group
+
+        /// <summary>
+        /// just make sure to update the views when we edit things
+        /// </summary>
+        private void uxGroupsView_CellEditFinished(object sender, CellEditEventArgs e)
+        {
+            UpdateListViews(true);
+        }//end uxGroupsView_CellEditFinished event handler
+
+        /// <summary>
+        /// just make sure to update the views when we edit things
+        /// </summary>
+        private void uxSavedHoursView_CellEditFinished(object sender, CellEditEventArgs e)
+        {
+
+        }//end uxGroupView_CellEditFinished event handler
     }//end class
 }//end namespace
