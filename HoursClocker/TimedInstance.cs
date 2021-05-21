@@ -28,6 +28,16 @@ namespace HoursClocker
         /// </summary>
         public DateTime End;
 
+        public string DateSpan { get { return $"{Start:g} => {End:g}"; } }
+        public string StartDateShort { get { return $"{Start:d}"; } }
+        public int Hours { get { return TimeSpan.Hours; } }
+        public int Minutes { get { return TimeSpan.Minutes; } }
+
+        /// <summary>
+        /// The name of this timed instance, likely as set arbitrarily by the user
+        /// </summary>
+        public string InstanceName { get; set; } = "Unnamed Instance";
+
         public TimeSpan TimeSpan
         {
             get
@@ -35,6 +45,11 @@ namespace HoursClocker
                 return End.Subtract(Start);
             }//end getter
         }//end TimeSpan
+
+        /// <summary>
+        /// The group which this time currently belongs to
+        /// </summary>
+        public TimeGrouping CurrentGroup { get; set; }
 
         /// <summary>
         /// whether or not we should worry about the exact beginning

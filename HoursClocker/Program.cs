@@ -16,7 +16,7 @@ namespace HoursClocker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new HoursClocker());
+            Application.Run(new HoursTracker());
         }
     }
 }

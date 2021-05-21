@@ -15,10 +15,48 @@ namespace HoursClocker
 {
     class TimeGrouping
     {
+        private List<TimedInstance> times;
         /// <summary>
         /// the times associated with this group
         /// </summary>
-        public List<TimedInstance> Times { get; set; }
+        public List<TimedInstance> Times
+        {
+            get
+            {
+                foreach(TimedInstance time in times)
+                {
+                    time.CurrentGroup = this;
+                }//end updating CurrentGroup for everything
+                return times;
+            }//end getter
+            set
+            {
+                times = value;
+            }//end setter
+        }//end Times
+
+        public int TimeCount
+        {
+            get
+            {
+                return times.Count;
+            }//end get
+        }//end TimeCount
+
+        public decimal TotalHours
+        {
+            get
+            {
+                decimal total = 0;
+
+                foreach(TimedInstance time in times)
+                {
+                    total += (decimal)time.TimeSpan.TotalHours;
+                }//end looping over each timed instance
+
+                return total;
+            }//end getter
+        }//end TotalTime
 
         private string groupName;
         /// <summary>
@@ -61,7 +99,9 @@ namespace HoursClocker
             Times = new List<TimedInstance>();
             foreach(TimedInstance time in times)
             {
-                Times.Add(new TimedInstance(time));
+                TimedInstance newTime = new TimedInstance(time);
+                newTime.CurrentGroup = this;
+                Times.Add(newTime);
             }//end copying over times
             GroupName = "Ungrouped";
         }//end 1-arg constructor
@@ -77,7 +117,9 @@ namespace HoursClocker
             Times = new List<TimedInstance>();
             foreach (TimedInstance time in times)
             {
-                Times.Add(new TimedInstance(time));
+                TimedInstance newTime = new TimedInstance(time);
+                newTime.CurrentGroup = this;
+                Times.Add(newTime);
             }//end copying over times
             GroupName = new StringBuilder(name).ToString();
         }//end 2-arg constructor

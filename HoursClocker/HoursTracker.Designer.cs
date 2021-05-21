@@ -1,7 +1,7 @@
 ﻿
 namespace HoursClocker
 {
-    partial class HoursClocker
+    partial class HoursTracker
     {
         /// <summary>
         /// Required designer variable.
@@ -30,9 +30,10 @@ namespace HoursClocker
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "Specify Date"}, -1, System.Drawing.Color.Empty, System.Drawing.Color.MintCream, null);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Specify Beginning and End");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Specify Beginning and End");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HoursTracker));
             this.uxNewClockInGroup = new System.Windows.Forms.GroupBox();
             this.uxCurrentTimeTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -58,16 +59,11 @@ namespace HoursClocker
             this.uxStartDateTimeLbl = new System.Windows.Forms.Label();
             this.uxAddPrevTimeBtn = new System.Windows.Forms.Button();
             this.uxSavedHoursGroup = new System.Windows.Forms.GroupBox();
-            this.uxSavedHoursView = new System.Windows.Forms.ListView();
-            this.uxInstanceHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.uxHoursHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.uxMinutesHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.uxDateHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.uxTimeInstanceOptions = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.uxRemoveTime = new System.Windows.Forms.ToolStripMenuItem();
             this.uxGroupsGroup = new System.Windows.Forms.GroupBox();
-            this.uxGroupsView = new System.Windows.Forms.ListView();
-            this.uxGroupNameHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.uxCountHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.uxTotalTimeHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.uxGroupOptions = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.uxRemoveGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.label7 = new System.Windows.Forms.Label();
             this.uxGroupNameTextBox = new System.Windows.Forms.TextBox();
             this.uxFormMenuStrip = new System.Windows.Forms.MenuStrip();
@@ -76,19 +72,30 @@ namespace HoursClocker
             this.uxToggleGroupsBtn = new System.Windows.Forms.ToolStripMenuItem();
             this.SystemTimeTimer = new System.Windows.Forms.Timer(this.components);
             this.uxElapsedTimeTimer = new System.Windows.Forms.Timer(this.components);
-            this.uxTimeInstanceOptions = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.uxRemoveTime = new System.Windows.Forms.ToolStripMenuItem();
-            this.uxGroupOptions = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.uxRemoveGroup = new System.Windows.Forms.ToolStripMenuItem();
+            this.uxTimeNameGroup = new System.Windows.Forms.GroupBox();
+            this.uxTimeNameTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.uxSavedHoursView = new BrightIdeasSoftware.ObjectListView();
+            this.uxInstanceColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.uxHoursColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.uxMinutesColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.uxDateColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.uxGroupsView = new BrightIdeasSoftware.ObjectListView();
+            this.uxGroupName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.uxTimeCount = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.uxTotalTime = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.uxNewClockInGroup.SuspendLayout();
             this.uxPrevHourGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uxPrevMinuteInputNUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uxPrevHourInputNUD)).BeginInit();
             this.uxSavedHoursGroup.SuspendLayout();
-            this.uxGroupsGroup.SuspendLayout();
-            this.uxFormMenuStrip.SuspendLayout();
             this.uxTimeInstanceOptions.SuspendLayout();
+            this.uxGroupsGroup.SuspendLayout();
             this.uxGroupOptions.SuspendLayout();
+            this.uxFormMenuStrip.SuspendLayout();
+            this.uxTimeNameGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.uxSavedHoursView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uxGroupsView)).BeginInit();
             this.SuspendLayout();
             // 
             // uxNewClockInGroup
@@ -289,13 +296,13 @@ namespace HoursClocker
             this.uxListViewOptions.GridLines = true;
             this.uxListViewOptions.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.uxListViewOptions.HideSelection = false;
-            listViewItem3.Checked = true;
-            listViewItem3.StateImageIndex = 1;
-            listViewItem4.Checked = true;
-            listViewItem4.StateImageIndex = 1;
+            listViewItem1.Checked = true;
+            listViewItem1.StateImageIndex = 1;
+            listViewItem2.Checked = true;
+            listViewItem2.StateImageIndex = 1;
             this.uxListViewOptions.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem3,
-            listViewItem4});
+            listViewItem1,
+            listViewItem2});
             this.uxListViewOptions.Location = new System.Drawing.Point(6, 19);
             this.uxListViewOptions.Name = "uxListViewOptions";
             this.uxListViewOptions.Scrollable = false;
@@ -426,53 +433,26 @@ namespace HoursClocker
             this.uxSavedHoursGroup.BackColor = System.Drawing.Color.MistyRose;
             this.uxSavedHoursGroup.Controls.Add(this.uxSavedHoursView);
             this.uxSavedHoursGroup.ForeColor = System.Drawing.Color.Maroon;
-            this.uxSavedHoursGroup.Location = new System.Drawing.Point(12, 464);
+            this.uxSavedHoursGroup.Location = new System.Drawing.Point(561, 27);
             this.uxSavedHoursGroup.Name = "uxSavedHoursGroup";
-            this.uxSavedHoursGroup.Size = new System.Drawing.Size(543, 168);
+            this.uxSavedHoursGroup.Size = new System.Drawing.Size(543, 543);
             this.uxSavedHoursGroup.TabIndex = 2;
             this.uxSavedHoursGroup.TabStop = false;
             this.uxSavedHoursGroup.Text = "Saved Hours";
             // 
-            // uxSavedHoursView
+            // uxTimeInstanceOptions
             // 
-            this.uxSavedHoursView.BackColor = System.Drawing.Color.SeaShell;
-            this.uxSavedHoursView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.uxInstanceHeader,
-            this.uxHoursHeader,
-            this.uxMinutesHeader,
-            this.uxDateHeader});
-            this.uxSavedHoursView.ContextMenuStrip = this.uxTimeInstanceOptions;
-            this.uxSavedHoursView.ForeColor = System.Drawing.Color.Maroon;
-            this.uxSavedHoursView.FullRowSelect = true;
-            this.uxSavedHoursView.GridLines = true;
-            this.uxSavedHoursView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.uxSavedHoursView.HideSelection = false;
-            this.uxSavedHoursView.Location = new System.Drawing.Point(6, 19);
-            this.uxSavedHoursView.Name = "uxSavedHoursView";
-            this.uxSavedHoursView.Size = new System.Drawing.Size(526, 143);
-            this.uxSavedHoursView.TabIndex = 0;
-            this.uxSavedHoursView.UseCompatibleStateImageBehavior = false;
-            this.uxSavedHoursView.View = System.Windows.Forms.View.Details;
+            this.uxTimeInstanceOptions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.uxRemoveTime});
+            this.uxTimeInstanceOptions.Name = "uxTimeInstanceOptions";
+            this.uxTimeInstanceOptions.Size = new System.Drawing.Size(147, 26);
             // 
-            // uxInstanceHeader
+            // uxRemoveTime
             // 
-            this.uxInstanceHeader.Text = "Instance";
-            this.uxInstanceHeader.Width = 122;
-            // 
-            // uxHoursHeader
-            // 
-            this.uxHoursHeader.Text = "Hours";
-            this.uxHoursHeader.Width = 112;
-            // 
-            // uxMinutesHeader
-            // 
-            this.uxMinutesHeader.Text = "Minutes";
-            this.uxMinutesHeader.Width = 114;
-            // 
-            // uxDateHeader
-            // 
-            this.uxDateHeader.Text = "Date";
-            this.uxDateHeader.Width = 128;
+            this.uxRemoveTime.Name = "uxRemoveTime";
+            this.uxRemoveTime.Size = new System.Drawing.Size(146, 22);
+            this.uxRemoveTime.Text = "Remove Time";
+            this.uxRemoveTime.Click += new System.EventHandler(this.uxRemoveTime_Click);
             // 
             // uxGroupsGroup
             // 
@@ -483,46 +463,24 @@ namespace HoursClocker
             this.uxGroupsGroup.ForeColor = System.Drawing.Color.Indigo;
             this.uxGroupsGroup.Location = new System.Drawing.Point(12, 287);
             this.uxGroupsGroup.Name = "uxGroupsGroup";
-            this.uxGroupsGroup.Size = new System.Drawing.Size(543, 171);
+            this.uxGroupsGroup.Size = new System.Drawing.Size(543, 283);
             this.uxGroupsGroup.TabIndex = 1;
             this.uxGroupsGroup.TabStop = false;
             this.uxGroupsGroup.Text = "Groups";
             // 
-            // uxGroupsView
+            // uxGroupOptions
             // 
-            this.uxGroupsView.BackColor = System.Drawing.Color.LavenderBlush;
-            this.uxGroupsView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.uxGroupNameHeader,
-            this.uxCountHeader,
-            this.uxTotalTimeHeader});
-            this.uxGroupsView.ContextMenuStrip = this.uxGroupOptions;
-            this.uxGroupsView.ForeColor = System.Drawing.Color.Indigo;
-            this.uxGroupsView.FullRowSelect = true;
-            this.uxGroupsView.GridLines = true;
-            this.uxGroupsView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.uxGroupsView.HideSelection = false;
-            this.uxGroupsView.LabelEdit = true;
-            this.uxGroupsView.Location = new System.Drawing.Point(6, 68);
-            this.uxGroupsView.Name = "uxGroupsView";
-            this.uxGroupsView.Size = new System.Drawing.Size(531, 97);
-            this.uxGroupsView.TabIndex = 2;
-            this.uxGroupsView.UseCompatibleStateImageBehavior = false;
-            this.uxGroupsView.View = System.Windows.Forms.View.Details;
+            this.uxGroupOptions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.uxRemoveGroup});
+            this.uxGroupOptions.Name = "uxGroupOptions";
+            this.uxGroupOptions.Size = new System.Drawing.Size(118, 26);
             // 
-            // uxGroupNameHeader
+            // uxRemoveGroup
             // 
-            this.uxGroupNameHeader.Text = "Name";
-            this.uxGroupNameHeader.Width = 193;
-            // 
-            // uxCountHeader
-            // 
-            this.uxCountHeader.Text = "Time Count";
-            this.uxCountHeader.Width = 113;
-            // 
-            // uxTotalTimeHeader
-            // 
-            this.uxTotalTimeHeader.Text = "Total Time";
-            this.uxTotalTimeHeader.Width = 97;
+            this.uxRemoveGroup.Name = "uxRemoveGroup";
+            this.uxRemoveGroup.Size = new System.Drawing.Size(117, 22);
+            this.uxRemoveGroup.Text = "Remove";
+            this.uxRemoveGroup.Click += new System.EventHandler(this.uxRemoveGroup_Click);
             // 
             // label7
             // 
@@ -554,7 +512,7 @@ namespace HoursClocker
             this.toolstriptools});
             this.uxFormMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.uxFormMenuStrip.Name = "uxFormMenuStrip";
-            this.uxFormMenuStrip.Size = new System.Drawing.Size(567, 24);
+            this.uxFormMenuStrip.Size = new System.Drawing.Size(1111, 24);
             this.uxFormMenuStrip.TabIndex = 3;
             this.uxFormMenuStrip.Text = "menuStrip1";
             // 
@@ -577,9 +535,10 @@ namespace HoursClocker
             // uxToggleGroupsBtn
             // 
             this.uxToggleGroupsBtn.BackColor = System.Drawing.Color.Transparent;
+            this.uxToggleGroupsBtn.Enabled = false;
             this.uxToggleGroupsBtn.ForeColor = System.Drawing.Color.Black;
             this.uxToggleGroupsBtn.Name = "uxToggleGroupsBtn";
-            this.uxToggleGroupsBtn.Size = new System.Drawing.Size(150, 22);
+            this.uxToggleGroupsBtn.Size = new System.Drawing.Size(180, 22);
             this.uxToggleGroupsBtn.Text = "Toggle Groups";
             this.uxToggleGroupsBtn.Click += new System.EventHandler(this.uxToggleGroupsBtn_Click);
             // 
@@ -593,55 +552,165 @@ namespace HoursClocker
             this.uxElapsedTimeTimer.Interval = 250;
             this.uxElapsedTimeTimer.Tick += new System.EventHandler(this.uxElapsedTimeTimer_Tick);
             // 
-            // uxTimeInstanceOptions
+            // uxTimeNameGroup
             // 
-            this.uxTimeInstanceOptions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.uxRemoveTime});
-            this.uxTimeInstanceOptions.Name = "uxTimeInstanceOptions";
-            this.uxTimeInstanceOptions.Size = new System.Drawing.Size(147, 26);
+            this.uxTimeNameGroup.BackColor = System.Drawing.Color.Honeydew;
+            this.uxTimeNameGroup.Controls.Add(this.label1);
+            this.uxTimeNameGroup.Controls.Add(this.uxTimeNameTextBox);
+            this.uxTimeNameGroup.ForeColor = System.Drawing.Color.OliveDrab;
+            this.uxTimeNameGroup.Location = new System.Drawing.Point(12, 210);
+            this.uxTimeNameGroup.Name = "uxTimeNameGroup";
+            this.uxTimeNameGroup.Size = new System.Drawing.Size(275, 71);
+            this.uxTimeNameGroup.TabIndex = 4;
+            this.uxTimeNameGroup.TabStop = false;
+            this.uxTimeNameGroup.Text = "Time Name";
             // 
-            // uxRemoveTime
+            // uxTimeNameTextBox
             // 
-            this.uxRemoveTime.Name = "uxRemoveTime";
-            this.uxRemoveTime.Size = new System.Drawing.Size(146, 22);
-            this.uxRemoveTime.Text = "Remove Time";
-            this.uxRemoveTime.Click += new System.EventHandler(this.uxRemoveTime_Click);
+            this.uxTimeNameTextBox.BackColor = System.Drawing.Color.GhostWhite;
+            this.uxTimeNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxTimeNameTextBox.ForeColor = System.Drawing.Color.OliveDrab;
+            this.uxTimeNameTextBox.Location = new System.Drawing.Point(6, 39);
+            this.uxTimeNameTextBox.Name = "uxTimeNameTextBox";
+            this.uxTimeNameTextBox.Size = new System.Drawing.Size(263, 26);
+            this.uxTimeNameTextBox.TabIndex = 15;
+            this.uxTimeNameTextBox.TabStop = false;
+            this.uxTimeNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // uxGroupOptions
+            // label1
             // 
-            this.uxGroupOptions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.uxRemoveGroup});
-            this.uxGroupOptions.Name = "uxGroupOptions";
-            this.uxGroupOptions.Size = new System.Drawing.Size(118, 26);
+            this.label1.BackColor = System.Drawing.Color.Ivory;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.OliveDrab;
+            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(263, 20);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Name of Current Time Instance";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uxRemoveGroup
+            // uxSavedHoursView
             // 
-            this.uxRemoveGroup.Name = "uxRemoveGroup";
-            this.uxRemoveGroup.Size = new System.Drawing.Size(180, 22);
-            this.uxRemoveGroup.Text = "Remove";
-            this.uxRemoveGroup.Click += new System.EventHandler(this.uxRemoveGroup_Click);
+            this.uxSavedHoursView.AllColumns.Add(this.uxInstanceColumn);
+            this.uxSavedHoursView.AllColumns.Add(this.uxHoursColumn);
+            this.uxSavedHoursView.AllColumns.Add(this.uxMinutesColumn);
+            this.uxSavedHoursView.AllColumns.Add(this.uxDateColumn);
+            this.uxSavedHoursView.BackColor = System.Drawing.Color.SeaShell;
+            this.uxSavedHoursView.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick;
+            this.uxSavedHoursView.CellEditTabChangesRows = true;
+            this.uxSavedHoursView.CellEditUseWholeCell = false;
+            this.uxSavedHoursView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.uxInstanceColumn,
+            this.uxHoursColumn,
+            this.uxMinutesColumn,
+            this.uxDateColumn});
+            this.uxSavedHoursView.ContextMenuStrip = this.uxTimeInstanceOptions;
+            this.uxSavedHoursView.Cursor = System.Windows.Forms.Cursors.Default;
+            this.uxSavedHoursView.EmptyListMsg = "No Times Found";
+            this.uxSavedHoursView.ForeColor = System.Drawing.Color.Maroon;
+            this.uxSavedHoursView.FullRowSelect = true;
+            this.uxSavedHoursView.GridLines = true;
+            this.uxSavedHoursView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.uxSavedHoursView.HideSelection = false;
+            this.uxSavedHoursView.Location = new System.Drawing.Point(6, 19);
+            this.uxSavedHoursView.Name = "uxSavedHoursView";
+            this.uxSavedHoursView.Size = new System.Drawing.Size(531, 518);
+            this.uxSavedHoursView.TabIndex = 1;
+            this.uxSavedHoursView.UseCompatibleStateImageBehavior = false;
+            this.uxSavedHoursView.View = System.Windows.Forms.View.Details;
             // 
-            // HoursClocker
+            // uxInstanceColumn
+            // 
+            this.uxInstanceColumn.AspectName = "InstanceName";
+            this.uxInstanceColumn.Text = "Instance";
+            this.uxInstanceColumn.Width = 200;
+            // 
+            // uxHoursColumn
+            // 
+            this.uxHoursColumn.AspectName = "Hours";
+            this.uxHoursColumn.Text = "Hours";
+            this.uxHoursColumn.Width = 78;
+            // 
+            // uxMinutesColumn
+            // 
+            this.uxMinutesColumn.AspectName = "Minutes";
+            this.uxMinutesColumn.Text = "Minutes";
+            this.uxMinutesColumn.Width = 88;
+            // 
+            // uxDateColumn
+            // 
+            this.uxDateColumn.AspectName = "StartDateShort";
+            this.uxDateColumn.Text = "Date";
+            this.uxDateColumn.Width = 90;
+            // 
+            // uxGroupsView
+            // 
+            this.uxGroupsView.AllColumns.Add(this.uxGroupName);
+            this.uxGroupsView.AllColumns.Add(this.uxTimeCount);
+            this.uxGroupsView.AllColumns.Add(this.uxTotalTime);
+            this.uxGroupsView.BackColor = System.Drawing.Color.LavenderBlush;
+            this.uxGroupsView.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick;
+            this.uxGroupsView.CellEditTabChangesRows = true;
+            this.uxGroupsView.CellEditUseWholeCell = false;
+            this.uxGroupsView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.uxGroupName,
+            this.uxTimeCount,
+            this.uxTotalTime});
+            this.uxGroupsView.ContextMenuStrip = this.uxGroupOptions;
+            this.uxGroupsView.Cursor = System.Windows.Forms.Cursors.Default;
+            this.uxGroupsView.EmptyListMsg = "No Groups Found";
+            this.uxGroupsView.ForeColor = System.Drawing.Color.Indigo;
+            this.uxGroupsView.GridLines = true;
+            this.uxGroupsView.HideSelection = false;
+            this.uxGroupsView.Location = new System.Drawing.Point(6, 68);
+            this.uxGroupsView.Name = "uxGroupsView";
+            this.uxGroupsView.Size = new System.Drawing.Size(531, 209);
+            this.uxGroupsView.TabIndex = 2;
+            this.uxGroupsView.UseCompatibleStateImageBehavior = false;
+            this.uxGroupsView.View = System.Windows.Forms.View.Details;
+            // 
+            // uxGroupName
+            // 
+            this.uxGroupName.AspectName = "GroupName";
+            this.uxGroupName.Text = "Name";
+            this.uxGroupName.Width = 176;
+            // 
+            // uxTimeCount
+            // 
+            this.uxTimeCount.AspectName = "TimeCount";
+            this.uxTimeCount.IsEditable = false;
+            this.uxTimeCount.Text = "Time Count";
+            this.uxTimeCount.Width = 132;
+            // 
+            // uxTotalTime
+            // 
+            this.uxTotalTime.AspectName = "TotalHours";
+            this.uxTotalTime.AspectToStringFormat = "";
+            this.uxTotalTime.IsEditable = false;
+            this.uxTotalTime.Text = "Total Hours";
+            this.uxTotalTime.Width = 126;
+            // 
+            // HoursTracker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Linen;
-            this.ClientSize = new System.Drawing.Size(567, 648);
+            this.ClientSize = new System.Drawing.Size(1111, 577);
+            this.Controls.Add(this.uxTimeNameGroup);
             this.Controls.Add(this.uxGroupsGroup);
             this.Controls.Add(this.uxSavedHoursGroup);
             this.Controls.Add(this.uxPrevHourGroup);
             this.Controls.Add(this.uxNewClockInGroup);
             this.Controls.Add(this.uxFormMenuStrip);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.uxFormMenuStrip;
             this.MaximizeBox = false;
-            this.Name = "HoursClocker";
-            this.ShowIcon = false;
+            this.Name = "HoursTracker";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "Hour Clocker";
+            this.Text = "Hour Tracker";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HoursClocker_FormClosing);
             this.Load += new System.EventHandler(this.HoursClocker_Load);
             this.uxNewClockInGroup.ResumeLayout(false);
@@ -650,12 +719,16 @@ namespace HoursClocker
             ((System.ComponentModel.ISupportInitialize)(this.uxPrevMinuteInputNUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.uxPrevHourInputNUD)).EndInit();
             this.uxSavedHoursGroup.ResumeLayout(false);
+            this.uxTimeInstanceOptions.ResumeLayout(false);
             this.uxGroupsGroup.ResumeLayout(false);
             this.uxGroupsGroup.PerformLayout();
+            this.uxGroupOptions.ResumeLayout(false);
             this.uxFormMenuStrip.ResumeLayout(false);
             this.uxFormMenuStrip.PerformLayout();
-            this.uxTimeInstanceOptions.ResumeLayout(false);
-            this.uxGroupOptions.ResumeLayout(false);
+            this.uxTimeNameGroup.ResumeLayout(false);
+            this.uxTimeNameGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.uxSavedHoursView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uxGroupsView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -682,11 +755,6 @@ namespace HoursClocker
         private System.Windows.Forms.Label uxStartDateTimeLbl;
         private System.Windows.Forms.Button uxAddPrevTimeBtn;
         private System.Windows.Forms.GroupBox uxSavedHoursGroup;
-        private System.Windows.Forms.ListView uxSavedHoursView;
-        private System.Windows.Forms.ColumnHeader uxInstanceHeader;
-        private System.Windows.Forms.ColumnHeader uxHoursHeader;
-        private System.Windows.Forms.ColumnHeader uxMinutesHeader;
-        private System.Windows.Forms.ColumnHeader uxDateHeader;
         private System.Windows.Forms.GroupBox uxGroupsGroup;
         private System.Windows.Forms.MenuStrip uxFormMenuStrip;
         private System.Windows.Forms.Label label7;
@@ -694,10 +762,6 @@ namespace HoursClocker
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolstriptools;
         private System.Windows.Forms.ToolStripMenuItem uxToggleGroupsBtn;
-        private System.Windows.Forms.ListView uxGroupsView;
-        private System.Windows.Forms.ColumnHeader uxGroupNameHeader;
-        private System.Windows.Forms.ColumnHeader uxCountHeader;
-        private System.Windows.Forms.ColumnHeader uxTotalTimeHeader;
         private System.Windows.Forms.ListView uxListViewOptions;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Timer SystemTimeTimer;
@@ -710,6 +774,18 @@ namespace HoursClocker
         private System.Windows.Forms.ToolStripMenuItem uxRemoveTime;
         private System.Windows.Forms.ContextMenuStrip uxGroupOptions;
         private System.Windows.Forms.ToolStripMenuItem uxRemoveGroup;
+        private System.Windows.Forms.GroupBox uxTimeNameGroup;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox uxTimeNameTextBox;
+        private BrightIdeasSoftware.ObjectListView uxSavedHoursView;
+        private BrightIdeasSoftware.OLVColumn uxInstanceColumn;
+        private BrightIdeasSoftware.OLVColumn uxHoursColumn;
+        private BrightIdeasSoftware.OLVColumn uxMinutesColumn;
+        private BrightIdeasSoftware.OLVColumn uxDateColumn;
+        private BrightIdeasSoftware.ObjectListView uxGroupsView;
+        private BrightIdeasSoftware.OLVColumn uxGroupName;
+        private BrightIdeasSoftware.OLVColumn uxTimeCount;
+        private BrightIdeasSoftware.OLVColumn uxTotalTime;
     }
 }
 

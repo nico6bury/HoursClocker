@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BrightIdeasSoftware;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +20,7 @@ using System.Windows.Forms;
 
 namespace HoursClocker
 {
-    public partial class HoursClocker : Form
+    public partial class HoursTracker : Form
     {
         /// <summary>
         /// whether or not the "Specify Date" item in the checked
@@ -62,7 +63,11 @@ namespace HoursClocker
 
         private TimeGroupManager groupManager;
 
-        public HoursClocker()
+        private TypedObjectListView<TimeGrouping> typedGroupView;
+
+        private TypedObjectListView<TimedInstance> typedTimeView;
+
+        public HoursTracker()
         {
             InitializeComponent();
             uxGroupsDefaultLocation = uxGroupsGroup.Location;
@@ -75,6 +80,48 @@ namespace HoursClocker
 
             SystemTimeTimer.Enabled = true;
             SystemTimeTimer_Tick(null, null);
+
+            //Do some whack ObjectListView things
+
+            //set up the typed olvs
+            typedGroupView = new TypedObjectListView<TimeGrouping>(this.uxGroupsView);
+            typedTimeView = new TypedObjectListView<TimedInstance>(this.uxSavedHoursView);
+
+            //set up weird delegate things
+            typedTimeView.GetColumn(0).GroupKeyGetter = delegate (TimedInstance timedInstance)
+            {
+                TimedInstance time = timedInstance;
+                return time.CurrentGroup;
+            };
+            uxInstanceColumn.GroupKeyToTitleConverter = delegate (object groupKey)
+            {
+                TimeGrouping groupObj = (TimeGrouping)groupKey;
+                return groupObj.GroupName;
+            };
+            uxInstanceColumn.GroupFormatter = (OLVGroup group,
+                GroupingParameters parms) =>
+            {
+                TimeGrouping groupObj = (TimeGrouping)group.Key;
+                //set default ID
+                group.Id = -1;
+                //try to determine ID based off date and time
+                DateTime earliestTime = DateTime.Now;
+                foreach(TimedInstance time in groupObj.Times)
+                {
+                    if (time.printDate && time.handleSpecificBeginEnd)
+                    {
+                        if(time.Start.Ticks < earliestTime.Ticks)
+                        {
+                            earliestTime = time.Start;
+                            break;
+                        }//end if we found an earlier time
+                    }//end if we have a date on this one
+                }//end looping for each time in the group
+                parms.GroupComparer = Comparer<OLVGroup>.Create
+                (
+                    (x, y) => (x.Id.CompareTo(y.Id))
+                );
+            };
         }//end constructor
 
         /// <summary>
@@ -379,32 +426,33 @@ namespace HoursClocker
         {
             //reset uxSavedHoursView
             uxSavedHoursView.Items.Clear();
-            uxSavedHoursView.Groups.Clear();
+            //uxSavedHoursView.Groups.Clear();
 
             //start updating uxSavedHoursView
-            foreach(TimeGrouping group in groupManager.Groups)
-            {
-                //initialize our group
-                ListViewGroup viewGroup = new ListViewGroup(group.GroupName);
-                uxSavedHoursView.Groups.Add(viewGroup);
-                foreach(TimedInstance time in group.Times)
-                {
-                    //add new item with proper text and group
-                    ListViewItem item = new ListViewItem(FormatInstancesForSavedView(time), viewGroup);
-                    uxSavedHoursView.Items.Add(item);
-                }//end looping over all the times in group
-            }//end looping over each group in the manager
+            //foreach(TimeGrouping group in groupManager.Groups)
+            //{
+            //    //initialize our group
+            //    OLVGroup olvGroup = new OLVGroup(group.GroupName);
+            //    //foreach(TimedInstance time in group.Times)
+            //    //{
+            //    //    //add new item with proper text and group
+            //    //    ListViewItem item = new ListViewItem(FormatInstancesForSavedView(time), viewGroup);
+            //    //    uxSavedHoursView.Items.Add(item);
+            //    //}//end looping over all the times in group
+            //}//end looping over each group in the manager
+            uxSavedHoursView.SetObjects(groupManager.Times);
 
-            //maybe we'll update the groupDisplay too
-            if (updateGroupDisplay)
-            {
-                uxGroupsView.Items.Clear();
-                foreach(TimeGrouping group in groupManager.Groups)
-                {
-                    ListViewItem item = new ListViewItem(FormatInstancesForGroupView(group.Times, group.GroupName));
-                    uxGroupsView.Items.Add(item);
-                }//end adding each group to the listview
-            }//end if we're actually going to update the Group Display
+            ////maybe we'll update the groupDisplay too
+            //if (updateGroupDisplay)
+            //{
+            //    uxGroupsView.Items.Clear();
+            //    foreach(TimeGrouping group in groupManager.Groups)
+            //    {
+            //        ListViewItem item = new ListViewItem(FormatInstancesForGroupView(group.Times, group.GroupName));
+            //        uxGroupsView.Items.Add(item);
+            //    }//end adding each group to the listview
+            //}//end if we're actually going to update the Group Display
+            uxGroupsView.SetObjects(groupManager.Groups);
         }//end UpdateListViews(updateGroupDisplay
 
         /// <summary>

@@ -46,7 +46,25 @@ namespace HoursClocker
                 }
                 return null;
             }//end get
-        }
+        }//end indexer
+
+        public List<TimedInstance> Times
+        {
+            get
+            {
+                List<TimedInstance> times = new List<TimedInstance>();
+
+                foreach(TimeGrouping group in Groups)
+                {
+                    foreach(TimedInstance time in group.Times)
+                    {
+                        times.Add(time);
+                    }//end looping over times in group
+                }//end looping over groups
+
+                return times;
+            }//end getter
+        }//end Times
 
         /// <summary>
         /// Initializes list of groups
