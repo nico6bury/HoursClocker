@@ -621,17 +621,22 @@ namespace HoursClocker
             {
                 time.Minutes = (int)e.NewValue;
             }//end else if we're editing the minutes
-            else if(e.Column == uxDateColumn)
+            else if(e.Column == uxStartDateColumn)
             {
-                try
-                {
-                    time.Start = DateTime.Parse((string)e.NewValue);
-                }//end trying to do the conversion
-                catch (FormatException)
-                {
-                    MessageBox.Show("Date Format Not Recognized", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }//end catching format error
+                time.Start = (DateTime)e.NewValue;
             }//end else if we're editing the date
+            else if(e.Column == uxEndDateColumn)
+            {
+                time.End = (DateTime)e.NewValue;
+            }//end else if we're editing the ending date
+            else if(e.Column == uxStartTimeColumn)
+            {
+                time.Start = (DateTime)e.NewValue;
+            }//end else if we're editing the starting time
+            else if(e.Column == uxEndTimeColumn)
+            {
+                time.End = (DateTime)e.NewValue;
+            }//end else if we're editing the ending time
 
             UpdateGroupManager(typedTimeView, groupManager);
 
