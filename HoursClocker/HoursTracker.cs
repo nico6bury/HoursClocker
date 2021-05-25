@@ -610,29 +610,6 @@ namespace HoursClocker
             //grab the instance we're editing out of those args
             TimedInstance time = (TimedInstance)e.RowObject;
 
-            ////initialize our object with dummy values
-            //TimedInstance time = null;
-
-            ////go ahead and look for the matching time in our manager
-            //for(int i = 0; i < groupManager.Groups.Count; i++)
-            //{
-            //    //for some reason if I don't do this, I get an ArgumentOutOfRange ¯\_(ツ)_/¯
-            //    int nextLoopTimes = i < groupManager.Groups.Count ?
-            //        groupManager.Groups[i].Times.Count :
-            //        groupManager.Groups[groupManager.Groups.Count - 1].Times.Count;
-
-            //    for(int ii = 0; ii < nextLoopTimes; ii++)
-            //    {
-            //        if (groupManager.Groups[i].Times[ii].Equals(timeFromOLV))
-            //        {
-            //            time = groupManager.Groups[i].Times[ii];
-
-            //            //break out of the entire loop
-            //            break;
-            //        }//end if we found the right one
-            //    }//end looping over times in group
-            //}//end looping over groups in manager
-
             //if we couldn't find it, break out of method
             if (time == null) return;
 
@@ -660,8 +637,25 @@ namespace HoursClocker
                 }//end catching format error
             }//end else if we're editing the date
 
-       
+            UpdateGroupManager(typedTimeView, groupManager);
+
             UpdateListViews(true);
         }//end uxGroupView_CellEditFinished event handler
+
+        /// <summary>
+        /// Updates the group manager based off of a list of timedInstances
+        /// </summary>
+        private void UpdateGroupManager(TypedObjectListView<TimedInstance> times,
+            TimeGroupManager timeGroupManager)
+        {
+            TimeGroupManager newManager = new TimeGroupManager();
+
+            foreach(TimedInstance time in times.Objects)
+            {
+                newManager.AddTime(time, time.CurrentGroup.GroupName);
+            }//end looping over all the times from the listview
+
+            timeGroupManager = newManager;
+        }//end UpdateGroupManager
     }//end class
 }//end namespace
