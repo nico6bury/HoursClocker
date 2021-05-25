@@ -20,14 +20,16 @@ namespace HoursClocker
     /// </summary>
     class TimedInstance
     {
+        private DateTime start;
         /// <summary>
         /// the start time for this object
         /// </summary>
-        public DateTime Start { get; set; }
+        public DateTime Start { get => start; set => start = value; }
+        private DateTime end;
         /// <summary>
         /// the end time for this object
         /// </summary>
-        public DateTime End { get; set; }
+        public DateTime End { get => end; set => end = value; }
 
         public string DateSpan { get { return $"{Start:g} => {End:g}"; } }
         public string StartDateShort { get { return $"{Start:d}"; }
@@ -42,7 +44,7 @@ namespace HoursClocker
                 //figure out the difference between what we have and what we want
                 int hoursDifference = value - TimeSpan.Hours;
                 //add those hours to the DateTime End thing
-                End.AddHours(hoursDifference);
+                End = End.AddHours(hoursDifference);
             }//end setter
         }//end Hours
         public int Minutes { get { return TimeSpan.Minutes; }
@@ -51,7 +53,7 @@ namespace HoursClocker
                 //figure out the difference between what we have and what we want
                 int minutesDifference = value - TimeSpan.Minutes;
                 //add those hours to the DateTime End thing
-                End.AddMinutes(minutesDifference);
+                End = End.AddMinutes(minutesDifference);
             }//end setter
         }//end Minutes
 
