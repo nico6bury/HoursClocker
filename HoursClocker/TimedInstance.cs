@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
 using System.Threading.Tasks;
 
 /*
@@ -22,11 +23,11 @@ namespace HoursClocker
         /// <summary>
         /// the start time for this object
         /// </summary>
-        public DateTime Start;
+        public DateTime Start { get; set; }
         /// <summary>
         /// the end time for this object
         /// </summary>
-        public DateTime End;
+        public DateTime End { get; set; }
 
         public string DateSpan { get { return $"{Start:g} => {End:g}"; } }
         public string StartDateShort { get { return $"{Start:d}"; }
@@ -54,10 +55,27 @@ namespace HoursClocker
             }//end setter
         }//end Minutes
 
+        private string instanceName;
         /// <summary>
         /// The name of this timed instance, likely as set arbitrarily by the user
         /// </summary>
-        public string InstanceName { get; set; } = "Unnamed Instance";
+        public string InstanceName
+        {
+            get
+            {
+                return instanceName;
+            }//end getter
+            set
+            {
+                StringBuilder nameBuilder = new StringBuilder();
+                foreach(char character in value)
+                {
+                    if (character != ';' && character != ',')
+                        nameBuilder.Append(character);
+                }//end looping foreach character in new value
+                instanceName = nameBuilder.ToString();
+            }//end setter
+        }//end InstanceName
 
         public TimeSpan TimeSpan
         {
@@ -76,12 +94,18 @@ namespace HoursClocker
         /// whether or not we should worry about the exact beginning
         /// and end when printing stuff out.
         /// </summary>
-        public bool handleSpecificBeginEnd;
+        public bool handleSpecificBeginEnd { get; set; }
 
         /// <summary>
         /// whether or not the ToString will include the date
         /// </summary>
-        public bool printDate = true;
+        public bool printDate { get; set; } = true;
+
+        public bool Equals(TimedInstance time)
+        {
+            return this.printDate == time.printDate && this.handleSpecificBeginEnd == time.handleSpecificBeginEnd &&
+                this.Start.Equals(time.Start) && this.End.Equals(time.End) && this.CurrentGroup == time.CurrentGroup;
+        }
 
         /// <summary>
         /// initializes DateTime object with a particular start and end time.
@@ -135,29 +159,24 @@ namespace HoursClocker
             splitters[0] = ';';
 
             string[] fileComponents = fileLine.Split(splitters, StringSplitOptions.RemoveEmptyEntries);
-            if (fileComponents.Length > 4) throw new ArgumentException("You seem to have too many semi-colons.");
 
-            //get handleSpecificBeginEnd
-            string value = fileComponents[0];
-            //gets substring after the first ','
-            value = value.Substring(value.IndexOf(',') + 1);
-            handleSpecificBeginEnd = Convert.ToBoolean(value);
-
-            //get printDate
-            value = fileComponents[1];
-            value = value.Substring(value.IndexOf(',') + 1);
-            printDate = Convert.ToBoolean(value);
-
-            //get start
-            value = fileComponents[2];
-            value = value.Substring(value.IndexOf(',') + 1);
-            Start = DateTime.Parse(value);
-
-            //get end
-            value = fileComponents[3];
-            value = value.Substring(value.IndexOf(',') + 1);
-            End = DateTime.Parse(value);
-
+            foreach(string component in fileComponents)
+            {
+                string[] componentComponents = component.Split(',');
+                PropertyInfo property = this.GetType().GetProperty(componentComponents[0]);
+                if(property.PropertyType == typeof(bool))
+                {
+                    property.SetValue(this, Convert.ToBoolean(componentComponents[1]));
+                }//end if the property is a bool
+                else if(property.PropertyType == typeof(DateTime))
+                {
+                    property.SetValue(this, DateTime.Parse(componentComponents[1]));
+                }//end else if property is a DateTime
+                else if(property.PropertyType == typeof(string))
+                {
+                    property.SetValue(this, componentComponents[1]);
+                }//end else if property is a string
+            }//end looping over each component of the line
         }//end 1-arg constructor for reading data from a file line
 
         public override string ToString()
@@ -187,6 +206,9 @@ namespace HoursClocker
         public string FormatForFile()
         {
             StringBuilder sb = new StringBuilder();
+
+            //add name to string
+            sb.Append($"InstanceName,{InstanceName};");
 
             //add boolean to string
             sb.Append($"handleSpecificBeginEnd,{handleSpecificBeginEnd};");

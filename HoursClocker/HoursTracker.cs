@@ -88,11 +88,15 @@ namespace HoursClocker
             typedTimeView = new TypedObjectListView<TimedInstance>(this.uxSavedHoursView);
 
             //set up weird delegate things
-            typedTimeView.GetColumn(0).GroupKeyGetter = delegate (TimedInstance timedInstance)
+            for(int i = 0; i < uxSavedHoursView.Columns.Count; i++)
             {
-                TimedInstance time = timedInstance;
-                return time.CurrentGroup;
-            };
+                typedTimeView.GetColumn(i).GroupKeyGetter = delegate (TimedInstance timedInstance)
+                {
+                    TimedInstance time = timedInstance;
+                    return time.CurrentGroup;
+                };
+            }//end setting all columns to use group name as group key
+            
             uxInstanceColumn.GroupKeyToTitleConverter = delegate (object groupKey)
             {
                 TimeGrouping groupObj = (TimeGrouping)groupKey;
@@ -122,6 +126,10 @@ namespace HoursClocker
                     (x, y) => (x.Id.CompareTo(y.Id))
                 );
             };
+            uxSavedHoursView.GetColumn(0).AspectPutter = delegate (object rowObject, object newValue)
+            {
+
+            };//end aspect putter for row name
         }//end constructor
 
         /// <summary>
@@ -236,8 +244,6 @@ namespace HoursClocker
         /// <summary>
         /// handles enabledness of things when the options checked list is changed by the user
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void uxListViewOptions_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
             /// <summary>
@@ -348,8 +354,6 @@ namespace HoursClocker
         /// <summary>
         /// happens the users wants to toggle groups on or off
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void uxToggleGroupsBtn_Click(object sender, EventArgs e)
         {
             //update a bunch of random variables
@@ -603,7 +607,62 @@ namespace HoursClocker
         /// </summary>
         private void uxSavedHoursView_CellEditFinished(object sender, CellEditEventArgs e)
         {
+            //grab the instance we're editing out of those args
+            TimedInstance timeFromOLV = (TimedInstance)e.RowObject;
 
+            //initialize our object with dummy values
+            TimedInstance time = null;
+
+            //go ahead and look for the matching time in our manager
+            for(int i = 0; i < groupManager.Groups.Count; i++)
+            {
+                //for some reason if I don't do this, I get an ArgumentOutOfRange ¯\_(ツ)_/¯
+                int nextLoopTimes = i < groupManager.Groups.Count ?
+                    groupManager.Groups[i].Times.Count :
+                    groupManager.Groups[groupManager.Groups.Count - 1].Times.Count;
+
+                for(int ii = 0; ii < nextLoopTimes; ii++)
+                {
+                    if (groupManager.Groups[i].Times[ii].Equals(timeFromOLV))
+                    {
+                        time = groupManager.Groups[i].Times[ii];
+
+                        //break out of the entire loop
+                        break;
+                    }//end if we found the right one
+                }//end looping over times in group
+            }//end looping over groups in manager
+
+            //if we couldn't find it, break out of method
+            if (time == null) return;
+
+            if(e.Column == uxInstanceColumn)
+            {
+                time.InstanceName = (string)e.NewValue;
+            }//end if we're editing the name
+            else if(e.Column == uxHoursColumn)
+            {
+                time.Hours = (int)e.NewValue;
+            }//end if we're editing the hours
+            else if(e.Column == uxMinutesColumn)
+            {
+                time.Minutes = (int)e.NewValue;
+            }//end else if we're editing the minutes
+            else if(e.Column == uxDateColumn)
+            {
+                try
+                {
+                    time.Start = DateTime.Parse((string)e.NewValue);
+                }//end trying to do the conversion
+                catch (FormatException)
+                {
+                    MessageBox.Show("Date Format Not Recognized", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }//end catching format error
+            }//end else if we're editing the date
+
+            
+
+            UpdateListViews(true);
         }//end uxGroupView_CellEditFinished event handler
     }//end class
 }//end namespace
