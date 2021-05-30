@@ -740,7 +740,6 @@ namespace HoursClocker
             this.Controls.Add(this.uxNewClockInGroup);
             this.Controls.Add(this.uxFormMenuStrip);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.uxFormMenuStrip;
             this.MaximizeBox = false;

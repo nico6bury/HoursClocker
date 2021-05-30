@@ -58,6 +58,19 @@ namespace HoursClocker
             }//end getter
         }//end TotalTime
 
+        public decimal TotalMinutes
+        {
+            get
+            {
+                decimal total = 0;
+                foreach(TimedInstance time in times)
+                {
+                    total += (decimal)time.TimeSpan.TotalMinutes;
+                }//end getting minutes from each time
+                return total;
+            }//end getter
+        }//end TotalMinutes
+
         private string groupName;
         /// <summary>
         /// the name of this group
@@ -147,6 +160,52 @@ namespace HoursClocker
         {
             Times.Remove(time);
         }//end Remove(time)
+
+        /// <summary>
+        /// Gets eariest TimeOfDay from the group without
+        /// taking date into account at all
+        /// </summary>
+        /// <returns>returns the earliest time</returns>
+        public TimedInstance EarliestTime
+        {
+            get
+            {
+                TimedInstance earliestTime = new TimedInstance(DateTime.Now, DateTime.Now);
+                foreach (TimedInstance time in Times)
+                {
+                    if (time.Start.TimeOfDay.Ticks < earliestTime.Start.TimeOfDay.Ticks)
+                    {
+                        earliestTime = time;
+                        break;
+                    }//end if we found an earlier time
+                }//end looping for each time in the group
+                return earliestTime;
+            }//end getter
+        }//end GetEarliestTime(times)
+
+        /// <summary>
+        /// Gets earliest starting DateTime from the group, taking time into account
+        /// </summary>
+        /// <returns>returns the earliest date</returns>
+        public TimedInstance EarliestDate
+        {
+            get
+            {
+                TimedInstance earliestDate = new TimedInstance(DateTime.Now, DateTime.Now);
+                foreach (TimedInstance time in Times)
+                {
+                    if (time.printDate && time.handleSpecificBeginEnd)
+                    {
+                        if (time.Start.Ticks < earliestDate.Start.Ticks)
+                        {
+                            earliestDate = time;
+                            break;
+                        }//end if we found an earlier time
+                    }//end if we have a date on this one
+                }//end looping for each time in the group
+                return earliestDate;
+            }//end getter
+        }//end GetEarliestDate(dates)
 
         /// <summary>
         /// returns a list of string lines formatted to be printed to a file.

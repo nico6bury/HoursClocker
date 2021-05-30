@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -97,41 +98,87 @@ namespace HoursClocker
                 };
             }//end setting all columns to use group name as group key
 
-            typedTimeView.GetColumn(0).GroupKeyGetter = delegate (TimedInstance time)
+            for(int i = 0; i < uxSavedHoursView.AllColumns.Count; i++)
             {
-                return time.CurrentGroup;
-            };
-            uxInstanceColumn.GroupKeyToTitleConverter = delegate (object groupKey)
-            {
-                if (groupKey == null) return "No Group Found";
-                TimeGrouping groupObj = (TimeGrouping)groupKey;
-                return groupObj.GroupName;
-            };
-            uxInstanceColumn.GroupFormatter = (OLVGroup group,
+                uxSavedHoursView.AllColumns[i].GroupKeyToTitleConverter = delegate (object groupKey)
+                {
+                    if (groupKey == null) return "No Group Found";
+                    TimeGrouping groupObj = (TimeGrouping)groupKey;
+                    return groupObj.GroupName;
+                };//end setting GroupKeyToTitleConverter
+            }//end looping to set groupKeyToTitleConverter for all the columns
+            
+            // do the group formatters
+
+            uxStartDateColumn.GroupFormatter = (OLVGroup group,
                 GroupingParameters parms) =>
             {
-                TimeGrouping groupObj = (TimeGrouping)group.Key;
-                //set default ID
-                group.Id = -1;
-                //try to determine ID based off date and time
-                DateTime earliestTime = DateTime.Now;
-                foreach(TimedInstance time in groupObj.Times)
-                {
-                    if (time.printDate && time.handleSpecificBeginEnd)
-                    {
-                        if(time.Start.Ticks < earliestTime.Ticks)
-                        {
-                            earliestTime = time.Start;
-                            break;
-                        }//end if we found an earlier time
-                    }//end if we have a date on this one
-                }//end looping for each time in the group
                 parms.GroupComparer = Comparer<OLVGroup>.Create
                 (
-                    (x, y) => (x.Id.CompareTo(y.Id))
-                );
+                    (x, y) => (((TimeGrouping)x.Key).EarliestDate.TimeSpan.Ticks.CompareTo(
+                        ((TimeGrouping)y.Key).EarliestDate.TimeSpan.Ticks)
+                    )
+                );//end group comparer definition
+            };//end group formatter for start date
 
-            };
+            uxEndDateColumn.GroupFormatter = (OLVGroup group,
+                GroupingParameters parms) =>
+            {
+                parms.GroupComparer = Comparer<OLVGroup>.Create
+                (
+                    (x, y) => (((TimeGrouping)x.Key).EarliestDate.TimeSpan.Ticks.CompareTo(
+                        ((TimeGrouping)y.Key).EarliestDate.TimeSpan.Ticks)
+                    )
+                );//end group comparer definition
+            };//end group formatter for end date
+
+            uxStartTimeColumn.GroupFormatter = (OLVGroup group,
+                GroupingParameters parms) =>
+            {
+                parms.GroupComparer = Comparer<OLVGroup>.Create
+                (
+                    (x, y) => (((TimeGrouping)x.Key).EarliestTime.TimeSpan.Ticks.CompareTo(
+                        ((TimeGrouping)y.Key).EarliestTime.TimeSpan.Ticks)
+                    )
+                );//end group comparer definition
+            };//end group formatter for start time
+
+            uxEndTimeColumn.GroupFormatter = (OLVGroup group,
+                GroupingParameters parms) =>
+            {
+                parms.GroupComparer = Comparer<OLVGroup>.Create
+                (
+                    (x, y) => (((TimeGrouping)x.Key).EarliestTime.TimeSpan.Ticks.CompareTo(
+                        ((TimeGrouping)y.Key).EarliestTime.TimeSpan.Ticks)
+                    )
+                );//end group comparer definition
+            };//end group formatter for end time
+
+            uxHoursColumn.GroupFormatter = (OLVGroup group, GroupingParameters parms) =>
+            {
+                parms.GroupComparer = Comparer<OLVGroup>.Create
+                    (
+                        (x, y) => ((TimeGrouping)x.Key).TotalHours.CompareTo(
+                        ((TimeGrouping)y.Key).TotalHours)
+                    );//end GroupCompareer
+            };//end GroupFormatter for Hours
+
+            uxMinutesColumn.GroupFormatter = (OLVGroup group, GroupingParameters parms) =>
+            {
+                parms.GroupComparer = Comparer<OLVGroup>.Create
+                    (
+                        (x, y) => ((TimeGrouping)x.Key).TotalMinutes.CompareTo(
+                        ((TimeGrouping)y.Key).TotalMinutes)
+                    );//end GroupCompareer
+            };//end GroupFormatter for Minutes
+
+            uxInstanceColumn.GroupFormatter = (OLVGroup group, GroupingParameters parms) =>
+            {
+                parms.GroupComparer = Comparer<OLVGroup>.Create
+                (
+                    (x, y) => ((TimeGrouping)x.Key).GroupName.CompareTo(((TimeGrouping)y.Key).GroupName)
+                );//end groupComparer
+            };//end GroupFormatter for InstanceName
         }//end constructor
 
         /// <summary>
