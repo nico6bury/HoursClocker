@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HourTracker", "HoursClocker\HourTracker.csproj", "{45EBBD29-FFB3-4498-BC88-516521E53B7B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HourTrackerLegacy", "HoursClocker\HourTrackerLegacy.csproj", "{45EBBD29-FFB3-4498-BC88-516521E53B7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HourClockerLibrary", "HourClockerLibrary\HourClockerLibrary.csproj", "{D1F41571-FBFD-45DB-9E03-7774ADBDC60E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HourTracker", "HoursTracker\HourTracker.csproj", "{2676B956-E1D1-4E09-A641-AC820A08124E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{45EBBD29-FFB3-4498-BC88-516521E53B7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45EBBD29-FFB3-4498-BC88-516521E53B7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45EBBD29-FFB3-4498-BC88-516521E53B7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1F41571-FBFD-45DB-9E03-7774ADBDC60E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1F41571-FBFD-45DB-9E03-7774ADBDC60E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1F41571-FBFD-45DB-9E03-7774ADBDC60E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1F41571-FBFD-45DB-9E03-7774ADBDC60E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2676B956-E1D1-4E09-A641-AC820A08124E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2676B956-E1D1-4E09-A641-AC820A08124E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2676B956-E1D1-4E09-A641-AC820A08124E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2676B956-E1D1-4E09-A641-AC820A08124E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

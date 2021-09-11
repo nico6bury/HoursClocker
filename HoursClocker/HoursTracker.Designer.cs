@@ -64,6 +64,9 @@ namespace HoursClocker
             this.uxHoursColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.uxMinutesColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.uxStartDateColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.uxEndDateColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.uxStartTimeColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.uxEndTimeColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.uxTimeInstanceOptions = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.uxRemoveTime = new System.Windows.Forms.ToolStripMenuItem();
             this.uxGroupsGroup = new System.Windows.Forms.GroupBox();
@@ -84,9 +87,6 @@ namespace HoursClocker
             this.uxTimeNameGroup = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.uxTimeNameTextBox = new System.Windows.Forms.TextBox();
-            this.uxEndDateColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.uxStartTimeColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.uxEndTimeColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.uxNewClockInGroup.SuspendLayout();
             this.uxPrevHourGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uxPrevMinuteInputNUD)).BeginInit();
@@ -438,7 +438,7 @@ namespace HoursClocker
             this.uxSavedHoursGroup.ForeColor = System.Drawing.Color.Maroon;
             this.uxSavedHoursGroup.Location = new System.Drawing.Point(561, 27);
             this.uxSavedHoursGroup.Name = "uxSavedHoursGroup";
-            this.uxSavedHoursGroup.Size = new System.Drawing.Size(603, 543);
+            this.uxSavedHoursGroup.Size = new System.Drawing.Size(600, 543);
             this.uxSavedHoursGroup.TabIndex = 2;
             this.uxSavedHoursGroup.TabStop = false;
             this.uxSavedHoursGroup.Text = "Saved Hours";
@@ -472,7 +472,7 @@ namespace HoursClocker
             this.uxSavedHoursView.HideSelection = false;
             this.uxSavedHoursView.Location = new System.Drawing.Point(6, 19);
             this.uxSavedHoursView.Name = "uxSavedHoursView";
-            this.uxSavedHoursView.Size = new System.Drawing.Size(591, 518);
+            this.uxSavedHoursView.Size = new System.Drawing.Size(588, 518);
             this.uxSavedHoursView.TabIndex = 1;
             this.uxSavedHoursView.UseCompatibleStateImageBehavior = false;
             this.uxSavedHoursView.View = System.Windows.Forms.View.Details;
@@ -504,6 +504,26 @@ namespace HoursClocker
             this.uxStartDateColumn.AspectToStringFormat = "{0: MM/dd/yyyy}";
             this.uxStartDateColumn.Text = "Start Date";
             this.uxStartDateColumn.Width = 73;
+            // 
+            // uxEndDateColumn
+            // 
+            this.uxEndDateColumn.AspectName = "End";
+            this.uxEndDateColumn.AspectToStringFormat = "{0: MM/dd/yyyy}";
+            this.uxEndDateColumn.DisplayIndex = 4;
+            this.uxEndDateColumn.IsVisible = false;
+            this.uxEndDateColumn.Text = "End Date";
+            // 
+            // uxStartTimeColumn
+            // 
+            this.uxStartTimeColumn.AspectName = "Start";
+            this.uxStartTimeColumn.AspectToStringFormat = "{0:h:mm tt}";
+            this.uxStartTimeColumn.Text = "Start Time";
+            // 
+            // uxEndTimeColumn
+            // 
+            this.uxEndTimeColumn.AspectName = "End";
+            this.uxEndTimeColumn.AspectToStringFormat = "{0:h:mm tt}";
+            this.uxEndTimeColumn.Text = "End Time";
             // 
             // uxTimeInstanceOptions
             // 
@@ -629,7 +649,7 @@ namespace HoursClocker
             this.uxFormMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.uxFormMenuStrip.Name = "uxFormMenuStrip";
             this.uxFormMenuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.uxFormMenuStrip.Size = new System.Drawing.Size(1176, 24);
+            this.uxFormMenuStrip.Size = new System.Drawing.Size(1173, 24);
             this.uxFormMenuStrip.TabIndex = 3;
             this.uxFormMenuStrip.Text = "menuStrip1";
             // 
@@ -706,33 +726,13 @@ namespace HoursClocker
             this.uxTimeNameTextBox.TabStop = false;
             this.uxTimeNameTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // uxEndDateColumn
-            // 
-            this.uxEndDateColumn.AspectName = "End";
-            this.uxEndDateColumn.AspectToStringFormat = "{0: MM/dd/yyyy}";
-            this.uxEndDateColumn.DisplayIndex = 4;
-            this.uxEndDateColumn.IsVisible = false;
-            this.uxEndDateColumn.Text = "End Date";
-            // 
-            // uxStartTimeColumn
-            // 
-            this.uxStartTimeColumn.AspectName = "Start";
-            this.uxStartTimeColumn.AspectToStringFormat = "{0:h:mm tt}";
-            this.uxStartTimeColumn.Text = "Start Time";
-            // 
-            // uxEndTimeColumn
-            // 
-            this.uxEndTimeColumn.AspectName = "End";
-            this.uxEndTimeColumn.AspectToStringFormat = "{0:h:mm tt}";
-            this.uxEndTimeColumn.Text = "End Time";
-            // 
             // HoursTracker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Linen;
-            this.ClientSize = new System.Drawing.Size(1176, 577);
+            this.ClientSize = new System.Drawing.Size(1173, 577);
             this.Controls.Add(this.uxTimeNameGroup);
             this.Controls.Add(this.uxGroupsGroup);
             this.Controls.Add(this.uxSavedHoursGroup);
