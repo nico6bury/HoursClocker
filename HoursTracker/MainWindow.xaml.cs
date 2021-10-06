@@ -18,6 +18,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace HourTracker
 {
@@ -26,9 +27,29 @@ namespace HourTracker
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// The timer we use for updating the system clock.
+        /// </summary>
+        protected DispatcherTimer clock = new DispatcherTimer();
+        
+        /// <summary>
+        /// Constructor for the MainWindow class.
+        /// </summary>
         public MainWindow()
         {
+            // initialize GUI
             InitializeComponent();
+            // set up system clock
+            clock.Start();
+            clock.Interval = new TimeSpan(0, 0, 1);
+            clock.Tick += clockElapsedEvent;
         }//end constructor
+
+        /// <summary>
+        /// Event that occurs every interval of clock. Generally intended to just
+        /// update displayed clock to user.
+        /// </summary>
+        protected void clockElapsedEvent(object sender, EventArgs e)
+        { ClockBox.Text = DateTime.Now.ToString(@"hh\:mm\:ss"); }
     }//end class
 }//end namespace

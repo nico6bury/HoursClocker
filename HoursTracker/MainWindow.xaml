@@ -1,0 +1,106 @@
+﻿<Window x:Class="HourTracker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HourTracker" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="Hour Tracker" Height="550" Width="1000" FontSize="17">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <!--Group for Clocking in-->
+        <GroupBox Grid.Column="0" Grid.Row="0" Header="New Clock In">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
+                           TextAlignment="Center" VerticalAlignment="Bottom" Text="Current Elapsed Time"/>
+                <TextBox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" TextAlignment="Center"
+                         VerticalAlignment="Center" Text="Timer Stopped"/>
+                <Button Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" Content="Clock In"/>
+                <Button Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Content="Cancel"/>
+                <Button Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" Content="Clock Out"/>
+                <TextBlock Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" TextAlignment="Center"
+                           VerticalAlignment="Bottom" Text="Current System Time"/>
+                <TextBox Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="4" TextAlignment="Center"
+                         VerticalAlignment="Center" Name="ClockBox"/>
+            </Grid>
+        </GroupBox>
+        <!--Group for naming instance-->
+        <GroupBox Grid.Column="0" Grid.Row="1" Header="Time Name">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" TextAlignment="Center" VerticalAlignment="Bottom"
+                           Text="Name of Current Time Instance"/>
+                <TextBox Grid.Row="1" TextAlignment="Center" VerticalAlignment="Top" Text="Unnamed Instance"/>
+            </Grid>
+        </GroupBox>
+        <!--Group for adding previous hours-->
+        <GroupBox Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Header="Add Previous Hours">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"
+                           TextAlignment="Center" Text="Hours"/>
+                <xctk:IntegerUpDown Grid.Column="1" Grid.Row="0" VerticalAlignment="Center"
+                                    Name="PrevHoursCount"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" VerticalAlignment="Center"
+                           TextAlignment="Center" Text="Minutes"/>
+                <xctk:IntegerUpDown Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"
+                                    Name="PrevMinutesCount"/>
+                <TextBlock Grid.Column="0" Grid.Row="2" VerticalAlignment="Center"
+                           TextAlignment="Center"  Text="Start Time"/>
+                <xctk:DateTimePicker Grid.Column="1" Grid.Row="2" VerticalAlignment="Center"
+                                     Format="Custom" FormatString="HH:MM dd-MMMM-yyy"
+                                     Name="PreviousStartPicker"/>
+                <TextBlock Grid.Column="0" Grid.Row="3" VerticalAlignment="Center"
+                           TextAlignment="Center" Text="End Line"/>
+                <xctk:DateTimePicker Grid.Column="1" Grid.Row="3" VerticalAlignment="Center"
+                                     Format="Custom" FormatString="HH:MM dd-MMMM-yyy"
+                                     Name="PreviousEndPicker"/>
+            </Grid>
+        </GroupBox>
+        <!--Group for saved instances-->
+        <GroupBox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Header="Saved Hours">
+            <ListView Name="HoursListView">
+                
+            </ListView>
+        </GroupBox>
+        <!--Group for time group options-->
+        <GroupBox Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Header="Groups">
+            <ListView Name="GroupsListView">
+                
+            </ListView>
+        </GroupBox>
+    </Grid>
+</Window>
