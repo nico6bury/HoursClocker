@@ -1,7 +1,7 @@
 # HoursClocker
 Just a little program I decided to put together to keep track of how much time I spend on various things.
 A lot of the code for it is pretty messy, but I was mostly focusing on getting the program done instead of worrying about the ease of updates. If I do end up updating it, that'll be a hurdle I'll have to get over, but I'll burn that bridge down when I get to it.
-Essentially, the current features are as follows:
+Essentially, the current features are as follows:  
 -Keep Track of time you do something and save it. Can also cancel this without saving it anywhere if you change your mind.  
 -Add previous time records into the program with following options  
  -Add time with specific starting and ending date and time. Works correctly for times that span across more than one day.  
