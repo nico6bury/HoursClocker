@@ -1,0 +1,26 @@
+There are numerous things left to do.
+
+Basic Functionallity to finish:
+1. Actually put all the buttons in so you can add previous hours.
+2. Put in a default color theme so that it's not just all white all the time.
+3. Implement serialization with some sort of actually decent file storage. I think it would be neat to make ourselves a folder in appdata to store things instead of just tossing them right by the executable.
+
+Cool features to implement (high priority):
+1. Get listview grouping set up for the saved hours listview so that you can easily tell which group each instance is in.
+2. Add ability to sort or filter timed instances, both to search for various strings and to sort alphabetically, by groups, by hours or minutes, by start or end date/time, etc.
+
+Quality of Life features that would be great:
+1. Automatically changing group name for next instance to be whatever group you select.
+2. Ability to change various settings within app, such as changing color theme (that could be cool), changing font size (though not all sizes would make sense), giving user ability to resize things somehow (though that would be really difficult), saving user adjustments to listview columns (can probably be done without being too painful as long as I can leverage JSON)
+3. Ability to edit instances within the app itself instead of going through the serialized files.
+4. Change formatting of DateTime in Saved Hours listview so it doesn't take up so much space.
+5. Would be extremely useful to be able to collapse and expand groups so that there's less clutter.
+6. Make sure tab control is set up correctly so you can hands-free easier
+7. Set up some sort of voice activation and response feature, since apparently WPF has some really nifty tools for that sort of thing.
+8. Make some sort of account features so that you can separate saved settings between different accounts, even log in and out and stuff.
+
+Long term maintenance stuff that might get done:
+1. Properly implement INotifyCollectionChanged everywhere so that the data bindings are at least a little less janky.
+
+Gibberish of suggestions from first release of legacy version:
+Notes: It is recommended that you put the executable in its own folder so it has less noise to cut through when looking for files. Currently, there's no way to name or differentiate various time instances. This is a likely avenue for further development. The only way to save your information is to close the program. That's a little inconvenient. Some information like the display of group info is not saved session-to-session. The font is pretty small. People with bad eyes might have trouble reading stuff. Not sure what the best way to resolve this would be, as I personally rather like the compactness of the window. It would also be nice to be able to sort different time instances or at least collapse specific groups. It's somewhat inconvenient to have to scroll down each time. If you really want to, you can add times and groups by editing the config file that generates upon the program being opened and closed. I don't plan on writing any kind of guide for that, but if you have a reference of the output, it probably wouldn't be that hard to figure out the pattern. You could also just check out the code.
