@@ -1,12 +1,12 @@
 There are numerous things left to do.
 
 Basic Functionallity to finish:
-1. Actually put all the buttons in so you can add previous hours. [DONE]
-2. Put in a default color theme so that it's not just all white all the time. [MOSTLY DONE]
-3. Implement serialization with some sort of actually decent file storage. I think it would be neat to make ourselves a folder in appdata to store things instead of just tossing them right by the executable.
+0. Actually put all the buttons in so you can add previous hours. [DONE]
+0. Put in a default color theme so that it's not just all white all the time. [MOSTLY DONE]
+1. Implement serialization with some sort of actually decent file storage. I think it would be neat to make ourselves a folder in appdata to store things instead of just tossing them right by the executable.
 
 Cool features to implement (high priority):
-1. Get listview grouping set up for the saved hours listview so that you can easily tell which group each instance is in.
+0. Get listview grouping set up for the saved hours listview so that you can easily tell which group each instance is in. [DONE]
 2. Add ability to sort or filter timed instances, both to search for various strings and to sort alphabetically, by groups, by hours or minutes, by start or end date/time, etc.
 
 Quality of Life features that would be great:
@@ -14,7 +14,7 @@ Quality of Life features that would be great:
 2. Ability to change various settings within app, such as changing color theme (that could be cool), changing font size (though not all sizes would make sense), giving user ability to resize things somehow (though that would be really difficult), saving user adjustments to listview columns (can probably be done without being too painful as long as I can leverage JSON)
 3. Ability to edit instances within the app itself instead of going through the serialized files.
 4. Change formatting of DateTime in Saved Hours listview so it doesn't take up so much space.
-5. Would be extremely useful to be able to collapse and expand groups so that there's less clutter.
+5. Would be extremely useful to be able to collapse and expand groups so that there's less clutter. [DONE]
 6. Make sure tab control is set up correctly so you can hands-free easier
 7. Set up some sort of voice activation and response feature, since apparently WPF has some really nifty tools for that sort of thing.
 8. Make some sort of account features so that you can separate saved settings between different accounts, even log in and out and stuff.
