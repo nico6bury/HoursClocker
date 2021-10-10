@@ -166,15 +166,22 @@ namespace HourTracker
         }//end BuildTimeList()
 
         /// <summary>
-        /// Add previous time from form to the 
+        /// Click event for the button clicked by the user to finalize
+        /// adding in a previous time.
         /// </summary>
-        protected void AddPreviousTime() {
-            // Grab all the data we need from the form
-            DateTime start = (DateTime)PreviousStartPicker.Value;
-            DateTime end = (DateTime)PreviousEndPicker.Value;
-            // Use the Add method to add stuff to our manager
-            AddTime(start, end);
-        }//end AddPreviousTime()
+        protected void FinalizePrevTime(object sender, EventArgs e)
+        {
+            if (sender is Button button){
+                if((string)button.Tag == "Finalize") {
+                    // Grab all the data we need from the form
+                    DateTime start = (DateTime)PreviousStartPicker.Value;
+                    DateTime end = (DateTime)PreviousEndPicker.Value;
+                    // Use the Add method to add stuff to our manager
+                    AddTime(start, end);
+                }//end if proper tag is found
+            }//end if sender is a button
+            else MessageBox.Show("Invalid Sender Type. Expected Button.");
+        }//end FinalizePrevTime click event handler
 
         /// <summary>
         /// React to timing buttons
@@ -203,7 +210,7 @@ namespace HourTracker
                         break;
                 }//end switch case
             }//end if sender is a button
-            else MessageBox.Show("Invalid Sender Type");
+            else MessageBox.Show("Invalid Sender Type. Expected Button.");
         }//end ClockedTimeButtonClick(sender, e)
     }//end class
 }//end namespace

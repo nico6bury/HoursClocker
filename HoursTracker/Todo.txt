@@ -1,8 +1,8 @@
 There are numerous things left to do.
 
 Basic Functionallity to finish:
-1. Actually put all the buttons in so you can add previous hours.
-2. Put in a default color theme so that it's not just all white all the time.
+1. Actually put all the buttons in so you can add previous hours. [DONE]
+2. Put in a default color theme so that it's not just all white all the time. [MOSTLY DONE]
 3. Implement serialization with some sort of actually decent file storage. I think it would be neat to make ourselves a folder in appdata to store things instead of just tossing them right by the executable.
 
 Cool features to implement (high priority):
@@ -18,6 +18,7 @@ Quality of Life features that would be great:
 6. Make sure tab control is set up correctly so you can hands-free easier
 7. Set up some sort of voice activation and response feature, since apparently WPF has some really nifty tools for that sort of thing.
 8. Make some sort of account features so that you can separate saved settings between different accounts, even log in and out and stuff.
+9. It would be really awesome if I was able to link up the timing functionallity here with the alarm app functionallity of my alarm app project from 501. Maybe like, clock in and then tell the program to alarm you once an hour has passed, or something like that? That'd be pretty cool, and I already have a Controller-Model from the team project, so that could work great.
 
 Long term maintenance stuff that might get done:
 1. Properly implement INotifyCollectionChanged everywhere so that the data bindings are at least a little less janky.

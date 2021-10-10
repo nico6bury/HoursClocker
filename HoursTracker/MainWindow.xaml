@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HourTracker" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Hour Tracker" Height="550" Width="1100" FontSize="17">
+        Title="Hour Tracker" Height="550" Width="1100" FontSize="17" Background="#0f0f2d" Foreground="GhostWhite">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="350"/>
@@ -59,12 +59,9 @@
                         <TextBlock Text="End Line"/>
                         <xctk:DateTimePicker Format="Custom" FormatString="MMMM-dd-yyy h:MM tt"
                                          Name="PreviousEndPicker"/>
-                        <StackPanel.Resources>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="VerticalAlignment" Value="Center"/>
-                                <Setter Property="TextAlignment" Value="Center"/>
-                            </Style>
-                        </StackPanel.Resources>
+                        <Button Name="FinalizePrevButton" Tag="Finalize" Click="FinalizePrevTime">
+                            Finalize
+                        </Button>
                     </StackPanel>
                 </TabItem>
             </TabControl>
@@ -126,18 +123,34 @@
         <Style TargetType="TextBlock">
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#0f0f2d"/>
+            <Setter Property="Foreground" Value="GhostWhite"/>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#0f0f2d"/>
+            <Setter Property="Foreground" Value="GhostWhite"/>
         </Style>
         <Style TargetType="xctk:DateTimePicker">
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#0f0f2d"/>
+            <Setter Property="Foreground" Value="GhostWhite"/>
         </Style>
         <Style TargetType="xctk:IntegerUpDown">
             <Setter Property="TextAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#0f0f2d"/>
+            <Setter Property="Foreground" Value="GhostWhite"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#0f0f2d"/>
+            <Setter Property="Foreground" Value="GhostWhite"/>
+        </Style>
+        <Style TargetType="ListView">
+            <Setter Property="Background" Value="#0f0f2d"/>
+            <Setter Property="Foreground" Value="GhostWhite"/>
         </Style>
     </Window.Resources>
 </Window>
