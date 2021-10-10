@@ -95,6 +95,11 @@ namespace HourTracker
             PreviousEndPicker.Value = DateTime.Now;
             // set source for lists
             GroupsListView.ItemsSource = Manager.Groups;
+            HoursListView.ItemsSource = Manager.Times;
+            CollectionView view = (CollectionView)CollectionViewSource
+                .GetDefaultView(HoursListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("CurrentGroupName");
+            view.GroupDescriptions.Add(groupDescription);
         }//end constructor
 
         /// <summary>
@@ -163,6 +168,11 @@ namespace HourTracker
         protected void BuildTimeList(List<TimedInstance> times) {
             HoursListView.ItemsSource = null;
             HoursListView.ItemsSource = times;
+
+            CollectionView view = (CollectionView)CollectionViewSource
+                .GetDefaultView(HoursListView.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("CurrentGroupName");
+            view.GroupDescriptions.Add(groupDescription);
         }//end BuildTimeList()
 
         /// <summary>

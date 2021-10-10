@@ -92,6 +92,8 @@ namespace HoursClockerLibrary
         /// </summary>
         public TimeGrouping CurrentGroup { get; set; }
 
+        public string CurrentGroupName { get => CurrentGroup.GroupName; }
+
         /// <summary>
         /// whether or not we should worry about the exact beginning
         /// and end when printing stuff out.

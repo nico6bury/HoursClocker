@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HourTracker" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Hour Tracker" Height="550" Width="1100" FontSize="17" Background="#0f0f2d" Foreground="GhostWhite">
+        Title="Hour Tracker" Height="550" Width="1150" FontSize="17" Background="#0f0f2d" Foreground="GhostWhite">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="350"/>
@@ -36,7 +36,7 @@
                         <TextBox Name="ClockBox" IsReadOnly="True"/>
                     </StackPanel>
                 </TabItem>
-                <!--Tab for adding previous hours-->
+                <!--Tab for adding previous h*ours-->
                 <TabItem Header="Add Previous Hours">
                     <StackPanel>
                         <Grid>
@@ -54,10 +54,10 @@
                             <xctk:IntegerUpDown Grid.Column="1" Grid.Row="1" Name="PrevMinutesCount"/>
                         </Grid>
                         <TextBlock Text="Start Time"/>
-                        <xctk:DateTimePicker Format="Custom" FormatString="MMMM-dd-yyy h:MM tt"
+                        <xctk:DateTimePicker Format="Custom" FormatString="MMMM-dd-yyy h:mm tt"
                                          Name="PreviousStartPicker"/>
                         <TextBlock Text="End Line"/>
-                        <xctk:DateTimePicker Format="Custom" FormatString="MMMM-dd-yyy h:MM tt"
+                        <xctk:DateTimePicker Format="Custom" FormatString="MMMM-dd-yyy h:mm tt"
                                          Name="PreviousEndPicker"/>
                         <Button Name="FinalizePrevButton" Tag="Finalize" Click="FinalizePrevTime">
                             Finalize
@@ -86,11 +86,11 @@
                     <ListView DockPanel.Dock="Top" Name="GroupsListView">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Name" Width="130"
+                                <GridViewColumn Header="Name" Width="240"
                                                 DisplayMemberBinding="{Binding GroupName}"/>
-                                <GridViewColumn Header="Time Count" Width="94"
-                                                DisplayMemberBinding="{Binding TimeCount}"/>
-                                <GridViewColumn Header="Total Hours" Width="94"
+                                <!--<GridViewColumn Header="Time Count" Width="94"
+                                                DisplayMemberBinding="{Binding TimeCount}"/>-->
+                                <GridViewColumn Header="Hours" Width="55"
                                                 DisplayMemberBinding="{Binding Path=TotalHours, StringFormat=N2}"/>
                             </GridView>
                         </ListView.View>
@@ -116,6 +116,36 @@
                                         DisplayMemberBinding="{Binding End}"/>
                     </GridView>
                 </ListView.View>
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="{x:Type GroupItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Expander IsExpanded="True">
+                                                <Expander.Header>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBlock Text="{Binding Name}"/>
+                                                        <TextBlock Text="&#x09;&#x09;"/>
+                                                        <TextBlock Text="{Binding ItemCount}"/>
+                                                        <TextBlock Text=" Instance(s)"/>
+                                                        <StackPanel.Resources>
+                                                            <Style TargetType="TextBlock">
+                                                                <Setter Property="Foreground" Value="GhostWhite"/>
+                                                            </Style>
+                                                        </StackPanel.Resources>
+                                                    </StackPanel>
+                                                </Expander.Header>
+                                                <ItemsPresenter/>
+                                            </Expander>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </ListView.GroupStyle>
             </ListView>
         </GroupBox>
     </Grid>
