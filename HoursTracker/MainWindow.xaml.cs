@@ -132,7 +132,8 @@ namespace HourTracker
                 {
                     case "ClockIn":
                         countingTimeRN = true;
-                        countedSeconds = 0;
+                        CountedSeconds = 0;
+                        clock.Stop(); clock.Start();
                         break;
                     case "CancelClock":
                         countingTimeRN = false;

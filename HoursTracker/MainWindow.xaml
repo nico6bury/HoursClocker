@@ -11,101 +11,93 @@
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="200"/>
-            <RowDefinition Height="86"/>
-            <RowDefinition Height="3*"/>
-        </Grid.RowDefinitions>
-        <!--Section with adding new times-->
-        <TabControl>
-            <TabItem Header="New Clock In">
-                <!--Group for Clocking in-->
-                <StackPanel>
-                    <TextBlock Text="Current Elapsed Time"/>
-                    <TextBox Name="TimeElapsedBox" IsReadOnly="True" Text="Timer Stopped"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="0.8*"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" VerticalAlignment="Center" Content="Clock In"
+        <DockPanel Margin="4.2 0 0 4.2">
+            <!--Section with adding new times-->
+            <TabControl DockPanel.Dock="Top">
+                <TabItem Header="New Clock In">
+                    <!--Group for Clocking in-->
+                    <StackPanel>
+                        <TextBlock Text="Current Elapsed Time"/>
+                        <TextBox Name="TimeElapsedBox" IsReadOnly="True" Text="Timer Stopped"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="0.8*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" VerticalAlignment="Center" Content="Clock In"
                         Name="ClockInButton" Tag="ClockIn" Click="ClockedTimeButtonClick"/>
-                        <Button Grid.Column="1" VerticalAlignment="Center" Content="Cancel"
+                            <Button Grid.Column="1" VerticalAlignment="Center" Content="Cancel"
                         Name="CancelClockButton" Tag="CancelClock" Click="ClockedTimeButtonClick"/>
-                        <Button Grid.Column="2" VerticalAlignment="Center" Content="Clock Out"
+                            <Button Grid.Column="2" VerticalAlignment="Center" Content="Clock Out"
                         Name="ClockOutButton" Tag="ClockOut" Click="ClockedTimeButtonClick"/>
-                    </Grid>
-                    <TextBlock Text="Current System Time"/>
-                    <TextBox Name="ClockBox"/>
-                </StackPanel>
-            </TabItem>
-            <!--Tab for adding previous hours-->
-            <TabItem Header="Add Previous Hours">
-                <StackPanel>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Text="Hours"/>
-                        <xctk:IntegerUpDown Grid.Row="1" Name="PrevHoursCount"/>
-                        <TextBlock Grid.Column="1" Text="Minutes"/>
-                        <xctk:IntegerUpDown Grid.Column="1" Grid.Row="1" Name="PrevMinutesCount"/>
-                    </Grid>
-                    <TextBlock Text="Start Time"/>
-                    <xctk:DateTimePicker Format="Custom" FormatString="HH:MM d-MMM-yy"
+                        </Grid>
+                        <TextBlock Text="Current System Time"/>
+                        <TextBox Name="ClockBox" IsReadOnly="True"/>
+                    </StackPanel>
+                </TabItem>
+                <!--Tab for adding previous hours-->
+                <TabItem Header="Add Previous Hours">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="Hours"/>
+                            <xctk:IntegerUpDown Grid.Row="1" Name="PrevHoursCount"/>
+                            <TextBlock Grid.Column="1" Text="Minutes"/>
+                            <xctk:IntegerUpDown Grid.Column="1" Grid.Row="1" Name="PrevMinutesCount"/>
+                        </Grid>
+                        <TextBlock Text="Start Time"/>
+                        <xctk:DateTimePicker Format="Custom" FormatString="MMMM-dd-yyy h:MM tt"
                                          Name="PreviousStartPicker"/>
-                    <TextBlock Text="End Line"/>
-                    <xctk:DateTimePicker Format="Custom" FormatString="HH:MM d-MMM-yy"
+                        <TextBlock Text="End Line"/>
+                        <xctk:DateTimePicker Format="Custom" FormatString="MMMM-dd-yyy h:MM tt"
                                          Name="PreviousEndPicker"/>
-                    <StackPanel.Resources>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="TextAlignment" Value="Center"/>
-                        </Style>
-                    </StackPanel.Resources>
-                </StackPanel>
-            </TabItem>
-        </TabControl>
-        
-        <!--Group for naming instance-->
-        <GroupBox Grid.Column="0" Grid.Row="1" Header="Time Name">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="Name of Current Time Instance"/>
-                <TextBox Grid.Row="1" TextAlignment="Center" VerticalAlignment="Top" Text="Unnamed Instance"
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="TextAlignment" Value="Center"/>
+                            </Style>
+                        </StackPanel.Resources>
+                    </StackPanel>
+                </TabItem>
+            </TabControl>
+
+            <!--Group for naming instance-->
+            <GroupBox DockPanel.Dock="Top" Grid.Column="0" Grid.Row="1" Header="Time Name">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Name of Current Time Instance"/>
+                    <TextBox Grid.Row="1" TextAlignment="Center" VerticalAlignment="Top" Text="Unnamed Instance"
                          Name="InstanceNameBox"/>
-            </Grid>
-        </GroupBox>
+                </Grid>
+            </GroupBox>
+            <!--Group for time group options-->
+            <GroupBox DockPanel.Dock="Top" Header="Groups" MinHeight="150">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="Current Group Name"/>
+                    <TextBox DockPanel.Dock="Top" Name="CurGroupName"/>
+                    <ListView DockPanel.Dock="Top" Name="GroupsListView">
+                        
+                    </ListView>
+                </DockPanel>
+            </GroupBox>
+        </DockPanel>
         
         <!--Group for saved instances-->
-        <GroupBox Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" Header="Saved Hours">
+        <GroupBox Grid.Column="1" Margin="4.2" Header="Saved Hours">
             <ListView Name="HoursListView">
-                
+
             </ListView>
-        </GroupBox>
-        <!--Group for time group options-->
-        <GroupBox Grid.Column="0" Grid.Row="2" Header="Groups">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="Current Group Name"/>
-                <TextBox Grid.Row="1" Name="CurGroupName"/>
-                <ListView Grid.Row="2" Name="GroupsListView">
-                    
-                </ListView>
-            </Grid>
         </GroupBox>
     </Grid>
     <Window.Resources>
