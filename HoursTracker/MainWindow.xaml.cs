@@ -138,7 +138,7 @@ namespace HourTracker
         /// </summary>
         protected void UpdateViewWithManager() {
             BuildGroupsList(manager.Groups);
-            BuildTimeList();
+            BuildTimeList(manager.Times);
         }//end UpdateViewWithManager()
 
         /// <summary>
@@ -160,8 +160,9 @@ namespace HourTracker
         /// <summary>
         /// Builds a list of timed instances into teh view based off provided list.
         /// </summary>
-        protected void BuildTimeList() {
-            // nothing here yet
+        protected void BuildTimeList(List<TimedInstance> times) {
+            HoursListView.ItemsSource = null;
+            HoursListView.ItemsSource = times;
         }//end BuildTimeList()
 
         /// <summary>

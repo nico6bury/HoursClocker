@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HourTracker" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Hour Tracker" Height="550" Width="720" FontSize="17">
+        Title="Hour Tracker" Height="550" Width="1100" FontSize="17">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <DockPanel Margin="4.2 0 0 4.2">
+        <DockPanel Margin="4,0,0,4">
             <!--Section with adding new times-->
             <TabControl DockPanel.Dock="Top">
                 <TabItem Header="New Clock In">
@@ -89,20 +89,36 @@
                     <ListView DockPanel.Dock="Top" Name="GroupsListView">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding GroupName}"/>
-                                <GridViewColumn Header="Time Count" DisplayMemberBinding="{Binding TimeCount}"/>
-                                <GridViewColumn Header="Total Hours" DisplayMemberBinding="{Binding TotalHours}"/>
+                                <GridViewColumn Header="Name" Width="130"
+                                                DisplayMemberBinding="{Binding GroupName}"/>
+                                <GridViewColumn Header="Time Count" Width="94"
+                                                DisplayMemberBinding="{Binding TimeCount}"/>
+                                <GridViewColumn Header="Total Hours" Width="94"
+                                                DisplayMemberBinding="{Binding Path=TotalHours, StringFormat=N2}"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
                 </DockPanel>
             </GroupBox>
         </DockPanel>
-        
-        <!--Group for saved instances-->
-        <GroupBox Grid.Column="1" Margin="4.2" Header="Saved Hours">
-            <ListView Name="HoursListView">
 
+        <!--Group for saved instances-->
+        <GroupBox Grid.Column="1" Margin="4,4,4,4" Header="Saved Hours">
+            <ListView Name="HoursListView">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Instance" Width="185"
+                                        DisplayMemberBinding="{Binding InstanceName}"/>
+                        <GridViewColumn Header="Hours" Width="55"
+                                        DisplayMemberBinding="{Binding Hours}"/>
+                        <GridViewColumn Header="Minutes" Width="72"
+                                        DisplayMemberBinding="{Binding Minutes}"/>
+                        <GridViewColumn Header="Start" Width="195"
+                                        DisplayMemberBinding="{Binding Start}"/>
+                        <GridViewColumn Header="End" Width="195"
+                                        DisplayMemberBinding="{Binding End}"/>
+                    </GridView>
+                </ListView.View>
             </ListView>
         </GroupBox>
     </Grid>
