@@ -87,7 +87,13 @@
                     <TextBlock DockPanel.Dock="Top" Text="Current Group Name"/>
                     <TextBox DockPanel.Dock="Top" Name="CurGroupName"/>
                     <ListView DockPanel.Dock="Top" Name="GroupsListView">
-                        
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding GroupName}"/>
+                                <GridViewColumn Header="Time Count" DisplayMemberBinding="{Binding TimeCount}"/>
+                                <GridViewColumn Header="Total Hours" DisplayMemberBinding="{Binding TotalHours}"/>
+                            </GridView>
+                        </ListView.View>
                     </ListView>
                 </DockPanel>
             </GroupBox>

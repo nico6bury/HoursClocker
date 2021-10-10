@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace HoursClockerLibrary
 {
-    public class TimeGrouping
+    public class TimeGrouping : INotifyCollectionChanged
     {
         private List<TimedInstance> times;
         /// <summary>
@@ -32,6 +33,7 @@ namespace HoursClockerLibrary
             set
             {
                 times = value;
+                CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace));
             }//end setter
         }//end Times
 
@@ -72,6 +74,13 @@ namespace HoursClockerLibrary
         }//end TotalMinutes
 
         private string groupName;
+
+        /// <summary>
+        /// Event called when one of the items in this group changes, or
+        /// this group of items as a whole changes.
+        /// </summary>
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
         /// <summary>
         /// the name of this group
         /// </summary>
@@ -159,6 +168,7 @@ namespace HoursClockerLibrary
         public void Remove(TimedInstance time)
         {
             Times.Remove(time);
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, time));
         }//end Remove(time)
 
         /// <summary>
@@ -277,7 +287,8 @@ namespace HoursClockerLibrary
                 //remove the first time from Lines
                 Lines.RemoveAt(0);
             }//end looping while we have lines to process
-            
+
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, Times));
         }//end ReadFromLines(Lines)
     }//end class
 }//end namespace

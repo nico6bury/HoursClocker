@@ -6,6 +6,7 @@
 
 using HoursClockerLibrary;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -23,16 +24,35 @@ namespace HourTracker
         /// </summary>
         protected DispatcherTimer clock = new DispatcherTimer();
         /// <summary>
-        /// The manager for all of the times.
+        /// Backer variable for Manager.
         /// </summary>
         protected TimeGroupManager manager = new TimeGroupManager();
         /// <summary>
-        /// Seconds counted since some particular starting point.
+        /// The manager for all of the times. Even if you change this, you'll
+        /// probably want to still call UpdateViewWithManager()
+        /// </summary>
+        protected TimeGroupManager Manager
+        {
+            get => manager;
+            set {
+                manager = value;
+                if (ManagerUpdatesView) UpdateViewWithManager();
+            }//end setter
+        }//end Manager
+        /// <summary>
+        /// Whether or not an update to the manager should update the view automatically.
+        /// </summary>
+        protected bool ManagerUpdatesView = true;
+        /// <summary>
+        /// Backer variable for countedSeconds.
         /// </summary>
         protected ulong countedSeconds = 0;
+        /// <summary>
+        /// Seconds counted since some particular starting point.
+        /// </summary>
         protected ulong CountedSeconds
         {
-            get { return countedSeconds; }
+            get => countedSeconds;
             set {
                 countedSeconds = value;
                 // trigger the binding so that it shows up
@@ -59,8 +79,7 @@ namespace HourTracker
         /// <summary>
         /// Constructor for the MainWindow class.
         /// </summary>
-        public MainWindow()
-        {
+        public MainWindow() {
             // initialize GUI
             InitializeComponent();
             // set up system clock
@@ -74,6 +93,8 @@ namespace HourTracker
             PrevMinutesCount.Value = 0;
             PreviousStartPicker.Value = DateTime.Now;
             PreviousEndPicker.Value = DateTime.Now;
+            // set source for lists
+            GroupsListView.ItemsSource = Manager.Groups;
         }//end constructor
 
         /// <summary>
@@ -107,14 +128,46 @@ namespace HourTracker
             TimedInstance time = new TimedInstance(start, end);
             time.InstanceName = instanceName;
             // add it to the group
-            manager.AddTime(time, groupName);
+            Manager.AddTime(time, groupName);
+            // update the view
+            UpdateViewWithManager();
         }//end AddTime(start, end)
+
+        /// <summary>
+        /// Updates lists in the view based off of information in the manager.
+        /// </summary>
+        protected void UpdateViewWithManager() {
+            BuildGroupsList(manager.Groups);
+            BuildTimeList();
+        }//end UpdateViewWithManager()
+
+        /// <summary>
+        /// Builds a list of groups into the view based off provided groups.
+        /// </summary>
+        /// <param name="groups">The list of groups to build.</param>
+        /// <remarks>This method is currently only needed because I don't
+        /// have the bindings properly set up for the TimeGrouping class.
+        /// If I can get the INotifyCollectionChanged interface fully working,
+        /// then this should theoretically not be needed, but that will
+        /// probably take awhile to do, and the trusty set the source to
+        /// null and then set it to what you want everytime it updates will
+        /// also work about as well in the meantime</remarks>
+        protected void BuildGroupsList(List<TimeGrouping> groups) {
+            GroupsListView.ItemsSource = null;
+            GroupsListView.ItemsSource = groups;
+        }//end BuildGroupsList()
+
+        /// <summary>
+        /// Builds a list of timed instances into teh view based off provided list.
+        /// </summary>
+        protected void BuildTimeList() {
+            // nothing here yet
+        }//end BuildTimeList()
 
         /// <summary>
         /// Add previous time from form to the 
         /// </summary>
-        protected void AddPreviousTime()
-        {
+        protected void AddPreviousTime() {
             // Grab all the data we need from the form
             DateTime start = (DateTime)PreviousStartPicker.Value;
             DateTime end = (DateTime)PreviousEndPicker.Value;
@@ -125,11 +178,9 @@ namespace HourTracker
         /// <summary>
         /// React to timing buttons
         /// </summary>
-        protected void ClockedTimeButtonClick(object sender, EventArgs e)
-        {
+        protected void ClockedTimeButtonClick(object sender, EventArgs e) {
             if (sender is Button button){
-                switch (button.Tag)
-                {
+                switch (button.Tag) {
                     case "ClockIn":
                         countingTimeRN = true;
                         CountedSeconds = 0;
