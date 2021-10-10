@@ -1,4 +1,5 @@
 ﻿using BrightIdeasSoftware;
+using HoursClockerLibrary;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -196,8 +197,6 @@ namespace HoursClocker
             TimeSpan endTime;
 
             TimedInstance timedInstance;
-
-            
 
             if (specifyDate)
             {

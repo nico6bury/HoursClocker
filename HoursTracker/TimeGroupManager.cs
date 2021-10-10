@@ -16,7 +16,7 @@ namespace HoursClockerLibrary
     /// <summary>
     /// this basically serves as an interface for a bunch of TimedInstance objects
     /// </summary>
-    class TimeGroupManager
+    public class TimeGroupManager
     {
         /// <summary>
         /// all the groups of times for this object
