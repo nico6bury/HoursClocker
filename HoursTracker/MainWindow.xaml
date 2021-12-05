@@ -86,12 +86,16 @@
                     <ListView DockPanel.Dock="Top" Name="GroupsListView">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Name" Width="240"
-                                                DisplayMemberBinding="{Binding GroupName}"/>
-                                <!--<GridViewColumn Header="Time Count" Width="94"
-                                                DisplayMemberBinding="{Binding TimeCount}"/>-->
-                                <GridViewColumn Header="Hours" Width="55"
-                                                DisplayMemberBinding="{Binding Path=TotalHours, StringFormat=N2}"/>
+                                <GridViewColumn Width="240" DisplayMemberBinding="{Binding GroupName}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Content="Name" Tag="Name"/>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
+                                <GridViewColumn Width="55" DisplayMemberBinding="{Binding Path=TotalHours, StringFormat=N2}">
+                                    <GridViewColumn.Header>
+                                        <GridViewColumnHeader Content="Hours" Tag="Age"/>
+                                    </GridViewColumn.Header>
+                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -104,16 +108,31 @@
             <ListView Name="HoursListView">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Instance" Width="185"
-                                        DisplayMemberBinding="{Binding InstanceName}"/>
-                        <GridViewColumn Header="Hours" Width="55"
-                                        DisplayMemberBinding="{Binding Hours}"/>
-                        <GridViewColumn Header="Minutes" Width="72"
-                                        DisplayMemberBinding="{Binding Minutes}"/>
-                        <GridViewColumn Header="Start" Width="195"
-                                        DisplayMemberBinding="{Binding Start}"/>
-                        <GridViewColumn Header="End" Width="195"
-                                        DisplayMemberBinding="{Binding End}"/>
+                        <GridViewColumn Width="185" DisplayMemberBinding="{Binding InstanceName}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Content="Instance"/>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="55" DisplayMemberBinding="{Binding Hours}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Content="Hours"/>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="72" DisplayMemberBinding="{Binding Minutes}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Content="Minutes"/>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="195" DisplayMemberBinding="{Binding Start}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Content="Start"/>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn Width="195" DisplayMemberBinding="{Binding End}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Content="End"/>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
                 <ListView.GroupStyle>

@@ -7,6 +7,7 @@
 using HoursClockerLibrary;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -222,5 +223,23 @@ namespace HourTracker
             }//end if sender is a button
             else MessageBox.Show("Invalid Sender Type. Expected Button.");
         }//end ClockedTimeButtonClick(sender, e)
+
+        private GridViewColumnHeader listViewSortCol = null;
+        /// <summary>
+        /// Click event for clicking on one of the headers for the group display listview
+        /// </summary>
+        private void GroupHeaderClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is GridViewColumnHeader header){
+                string sortby = header.Tag.ToString();
+                if(listViewSortCol != null){
+                    GroupsListView.Items.SortDescriptions.Clear();
+                }//end if we've sorted before?
+
+                ListSortDirection newDir = ListSortDirection.Ascending;
+                if(listViewSortCol == header && listVire)
+            }//end if sender is grid view item header
+            else MessageBox.Show("Invalid Sender Type. Expected Button.");
+        }//end GroupHeaderClick event handler
     }//end class
 }//end namespace
